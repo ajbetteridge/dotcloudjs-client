@@ -66,6 +66,7 @@ function copy_src_files(dst) {
     }
 
     copy(__dirname + '/libraries/jq-cookie.js', dst + '/jq-cookie.js');
+    copy(__dirname + '/libraries/stack.io.js', dst + '/stack.io.js');
 }
 
 if (argc === 3) { // No additional arguments, default build
