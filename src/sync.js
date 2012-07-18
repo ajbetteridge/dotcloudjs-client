@@ -59,16 +59,13 @@ define(function(require) {
         var sync = {
             // `sync.synchronize(collection, [mode])`  
             // `collection` identifies a collection (well, duh) of objects.  
-            // `mode` is the persistence layer used. Currently supports mongo, redis. 
-            // Defaults to mongo.
+            // `mode` is the persistence layer used. Currently only supports mongo.
             synchronize : function(collection, mode, pvt) {
                 if (pvt === undefined && (typeof mode == 'boolean')) {
                     pvt = mode, mode = undefined;
                 }
 
-                if (mode === 'redis') {
-                    return new this.RedisArray(collection, pvt);
-                } else if (mode == 'mongo' || !mode) {
+                if (mode == 'mongo' || !mode) {
                     return new this.Array(collection, pvt);
                 } else {
                     throw 'Unsupported persistence mode: ' + mode;
@@ -265,16 +262,16 @@ define(function(require) {
 
             // We call this RPC method once when creating the array to retrieve
             // the whole collection.
-            io.call(this.__config().svcName, 'retrieve')(dbid, collection, function(result) {
-                if (result[0])
-                    throw JSON.stringify(result[0]);
-                switch (result[1].type) {
+            io.call(this.__config().svcName, 'retrieve')(dbid, collection, function(error, result) {
+                if (error)
+                    throw JSON.stringify(error);
+                switch (result.type) {
                     case 'synchronized':
-                        data = result[1].data || [];
+                        data = result.data || [];
                         notifyChanged('synchronized', data);
                         break;
                     case 'inserted':
-                        var obj = result[1].data;
+                        var obj = result.data;
                         var i, j;
                         if (obj instanceof Array) {
                             for (j = obj.length - 1; j >= 0; j--) {
@@ -296,7 +293,7 @@ define(function(require) {
                         notifyChanged('inserted', obj);
                         break;
                     case 'removed':
-                        var id = result[1].data;
+                        var id = result.data;
                         for (var i = data.length - 1; i >= 0; i--) {
                             if (data[i]._id === id) {
                                 if (i === 0) { 
@@ -316,7 +313,7 @@ define(function(require) {
                         notifyChanged('removedall', data);
                         break;
                     case 'updated':
-                        var obj = result[1].data;
+                        var obj = result.data;
                         if (!obj)
                             return;
                         for (var i = data.length - 1; i >= 0; i--) {
@@ -328,7 +325,7 @@ define(function(require) {
                         }
                         break;
                     default:
-                        throw 'Unexpected change type: ' + result[1].type;
+                        throw 'Unexpected change type: ' + result.type;
                 }
             });
 
@@ -343,12 +340,12 @@ define(function(require) {
         // update command will be sent to the underlying persistence layer.
         sync.Array.prototype.at = function(index, update) {
             var data = this.__data(),
-                config = this.__config();
+                cfg = this.__config();
 
             if (!!update) {
                 data[index] = merge(data[index], update);
-                io.call(this.__config().svcName, 'update')(config.dbid, config.collection, data[index]._id, data[index], function(result) {
-                    if (result[0]) throw result[0];
+                io.call(cfg.svcName, 'update')(cfg.dbid, cfg.collection, data[index]._id, data[index], function(error, result) {
+                    if (error) throw error;
                 });
             }
             return data[index];
@@ -358,10 +355,10 @@ define(function(require) {
         // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop>
         sync.Array.prototype.pop = function() {
             var data = this.__data(),
-                config = this.__config();
-            io.call(this.__config().svcName, 'remove')(config.dbid, config.collection, data[data.length - 1]._id, 
-                function(result) {
-                    if (result[0]) throw result[0];
+                cfg = this.__config();
+            io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[data.length - 1]._id, 
+                function(error, result) {
+                    if (error) throw error;
                 });
 
             return data[data.length - 1];
@@ -371,7 +368,7 @@ define(function(require) {
         // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push>
         sync.Array.prototype.push = function(obj) {
             var data = this.__data(),
-                config = this.__config();
+                cfg = this.__config();
 
             if (arguments.length > 1) {
                 var args = [];
@@ -381,18 +378,18 @@ define(function(require) {
                 obj = args;
             }
 
-            io.call(this.__config().svcName, 'add')(config.dbid, config.collection, obj, function(result) {
-                if (result[0]) throw result[0];
+            io.call(cfg.svcName, 'add')(cfg.dbid, cfg.collection, obj, function(error, result) {
+                if (error) throw error;
             });
             return data.length + arguments.length;
         };
 
         sync.Array.prototype.shift = function() {
             var data = this.__data(),
-                config = this.__config();
+                cfg = this.__config();
 
-            io.call(this.__config().svcName, 'remove')(config.dbid, config.collection, data[0]._id, function(result) {
-                if (result[0]) throw result[0];
+            io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[0]._id, function(error, result) {
+                if (error) throw error;
             });
             return data[0];
         };
@@ -402,16 +399,16 @@ define(function(require) {
         // **Note: the returned Array is a plain, non-synchronized Javascript array.**
         sync.Array.prototype.splice = function(index, num) {
             var data = this.__data(),
-                config = this.__config(),
-                rmCb = function(result) {
-                    if (result[0]) throw result[0];
+                cfg = this.__config(),
+                rmCb = function(error, result) {
+                    if (error) throw error;
                 };
 
             if (index < 0)
                 index += data.length;
 
             for (var i = num - 1; i >= 0; i--) {
-                io.call(this.__config().svcName, 'remove')(config.dbid, config.collection, data[index + i]._id, rmCb);
+                io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[index + i]._id, rmCb);
             }
             
             for (i = arguments.length - 1; i >= 2; i--) {
@@ -423,7 +420,7 @@ define(function(require) {
         // `Array#unshift(objs...)`  
         // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift>
         sync.Array.prototype.unshift = function(obj) {
-            var config = this.__config();
+            var cfg = this.__config();
 
             if (arguments.length > 1) {
                 var args = [];
@@ -433,149 +430,9 @@ define(function(require) {
                 obj = args;
             }
 
-            io.call(this.__config().svcName, 'add')(config.dbid, config.collection, obj, function(result) {
-                if (result[0]) throw result[0];
+            io.call(cfg.svcName, 'add')(cfg.dbid, cfg.collection, obj, function(error, result) {
+                if (error) throw error;
             });
-        };
-
-        // ### sync.RedisArray
-        // Synchronized Array type, but mapped on a redis list.  
-        // Documentation provided for `sync.Array` is valid for this class unless 
-        // otherwise stated.
-        sync.RedisArray = function(collection) {
-            var data = [];
-            var dbid = config.dbid;
-
-            // Inherit the AbstractArray class
-            inherits(sync.RedisArray, AbstractArray);
-            sync.RedisArray.super.apply(this);
-
-            this.__data = function() { return data; };
-            this.__config = function() {
-                return {
-                    dbid: dbid,
-                    collection: collection
-                };
-            };
-
-            var notifyChanged = this.__notifyChanged;
-
-            io.call('sync-redis', 'retrieve')(dbid, collection, function(result) {
-                if (result[0])
-                    throw JSON.stringify(result[0]);
-                var resData = result[1].data;
-                switch (result[1].type) {
-                    case 'synchronized':
-                        data = result[1].data || [];
-                        notifyChanged('synchronized', data);
-                        break;
-                    case 'inserted':
-                        if (resData.object instanceof Array) {
-                            data[resData.operation].apply(data, resData.object);
-                        } else {
-                            data[resData.operation](resData.object);
-                        }
-                        notifyChanged(resData.operation, resData.object);
-                        break;
-                    case 'removed':
-                        data[resData.operation]();
-                        notifyChanged(resData.operation, resData.object);
-                        break;
-                    case 'updated':
-                        data[resData.index] = resData.object;
-                        notifyChanged('updated', resData.object, resData.index);
-                        break;
-                    case 'spliced':
-                        if (!resData.objects || !resData.objects.length) {
-                            data.splice(resData.index, resData.num);
-                        } else {
-                            var args = resData.objects.slice(0);
-                            args.unshift(resData.index, resData.num);
-                            data.splice.apply(data, args);
-                        }
-                        notifyChanged('spliced', resData.index, resData.num, resData.objects);
-                        break;
-                    default:
-                        throw 'Unexpected change type: ' + result[1].type;
-                }
-            });
-
-            this.length = data.length;
-        };
-
-        sync.RedisArray.prototype.at = function(index, update) {
-            var data = this.__data(), config = this.__config();
-            if (!!update) {
-                data[index] = merge(data[index], update);
-                io.call('sync-redis', 'update')(config.dbid, config.collection, index, data[index], function(result) {
-                    if (result[0]) throw result[0];
-                });
-            }
-            return data[index];
-        };
-
-        sync.RedisArray.prototype.pop = function() {
-            var data = this.__data(), config = this.__config();
-            io.call('sync-redis', 'pop')(config.dbid, config.collection, function(result) {
-                if (result[0]) throw result[0];
-            });
-            return data[data.length - 1];
-        };
-
-        sync.RedisArray.prototype.push = function(obj) {
-            var data = this.__data(), config = this.__config();
-            if (arguments.length > 1) {
-                var args = [];
-                for (var i = arguments.length - 1; i >= 0; i--) {
-                    args.unshift(arguments[i]);
-                }
-                obj = args;
-            }
-
-            io.call('sync-redis', 'push')(config.dbid, config.collection, obj, function(result) {
-                if (result[0]) throw result[0];
-            });
-            return data.length + arguments.length;
-        };
-
-        sync.RedisArray.prototype.shift = function() {
-            var data = this.__data(), config = this.__config();
-            io.call('sync-redis', 'shift')(config.dbid, config.collection, function(result) {
-                if (result[0]) throw result[0];
-            });
-            return data[0];
-        };
-
-        sync.RedisArray.prototype.splice = function(index, num) {
-            var data = this.__data(), config = this.__config();
-            if (index < 0)
-                index += data.length;
-            var objects = [];
-            for (var i = arguments.length - 1; i >= 2; i--) {
-                 objects.push(arguments[i]);
-            }
-            io.call('sync-redis', 'splice')(config.dbid, config.collection, index, num, objects, function(result) {
-                if (result[0]) {
-                    throw result[0];
-                }
-            });
-            return data.slice(index, index + num - 1);
-        };
-
-        sync.RedisArray.prototype.unshift = function(obj) {
-            var data = this.__data(), config = this.__config();
-            if (arguments.length > 1) {
-                var args = [];
-                for (var i = arguments.length - 1; i >= 0; i--) {
-                    args.unshift(arguments[i]);
-                }
-                obj = args;
-            }
-
-            io.call('sync-redis', 'unshift')(config.dbid, config.collection, obj, function(result) {
-                if (result[0]) throw result[0];
-            });
-            return data[0];
         };
 
         return sync;
