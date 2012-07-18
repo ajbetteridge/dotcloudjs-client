@@ -41,12 +41,12 @@ define(function(require) {
                     
                 }
 
-                io.call('twitter', 'init')(key, secret, token, function(svcName) {
-                    if (svcName.error) {
-                        if (typeof svcName.error == 'string') {
-                            throw svcName.error;
+                io.call('twitter', 'init')(key, secret, token, function(err, svcName) {
+                    if (err) {
+                        if (typeof err == 'string') {
+                            throw err;
                         } else {
-                            throw JSON.stringify(svcName.error);
+                            throw JSON.stringify(err);
                         }
                     } else {
                         appKey = key;
@@ -736,8 +736,8 @@ define(function(require) {
                         return cb({ error: 'Received token is different from sent token' });
                     }
 
-                    io.call(appService, 'accessToken')(data.verifier, data.token, secret, function(result) {
-                        if (!result.error) {
+                    io.call(appService, 'accessToken')(data.verifier, data.token, secret, function(err, result) {
+                        if (!err) {
                             accessToken = { key: result.key, secret: result.secret };
                         }
                         cb(result);
@@ -757,21 +757,21 @@ define(function(require) {
                 var cookie = JSON.parse($.cookie('dotcloudjs-twitter.' + appKey));
                 if (cookie && cookie.screen_name) {
                     accessToken = { key: cookie.key, secret: cookie.secret };
-                    return cb(cookie);
+                    return cb(null, cookie);
                 }
                 var self = this;
-                this.requestToken(function(result) {
-                    if (result.error) {
-                        return cb(result);
+                this.requestToken(function(err, result) {
+                    if (err) {
+                        return cb(err);
                     }
-                    self.accessToken(result.token, result.secret, function(r2) {
-                        if (r2.error) {
-                            return cb(r2);
+                    self.accessToken(result.token, result.secret, function(err, r2) {
+                        if (err) {
+                            return cb(err);
                         }
                         $.cookie('dotcloudjs-twitter.' + r2.appKey, 
                             JSON.stringify(r2), { expires: 9001, path: '/' });
                         accessToken = { key: r2.key, secret: r2.secret };
-                        cb(r2);
+                        cb(null, r2);
                     });
                 });
             },
