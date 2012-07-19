@@ -5,11 +5,18 @@
  * This project is free software released under the MIT license:
  * http://www.opensource.org/licenses/mit-license.php
  */
-// ## dotcloud.sync
-// *Sub-module providing the synchronized storage API.*  
-// You can retrieve a collection using the sync.synchronize method.
-// All collections retrieved this way are automatically synchronized across all the
-// clients who access it. Changes are persisted (in mongoDB or redis) and propagated.
+/**
+    Sub-module providing the synchronized storage API. 
+
+    @description
+    You can retrieve a collection using the sync.synchronize method.
+    All collections retrieved this way are automatically synchronized across all the
+    clients who access it. Changes are persisted (in mongoDB or redis) and propagated.
+
+    
+    @name dotcloud.sync
+    @class
+*/
 define(function(require) {
 
     // We use izs' `inherits` function to factor similar behavior between our 
@@ -57,10 +64,21 @@ define(function(require) {
 
         // `dotcloud.sync` object.
         var sync = {
+            /**
+                
+            */
+
             // `sync.synchronize(collection, [mode])`  
             // `collection` identifies a collection (well, duh) of objects.  
             // `mode` is the persistence layer used. Currently supports mongo, redis. 
             // Defaults to mongo.
+
+            /**
+                Does something
+
+                @name dotcloud.js.sync#synchronize
+                @function
+            */
             synchronize : function(collection, mode, pvt) {
                 if (pvt === undefined && (typeof mode == 'boolean')) {
                     pvt = mode, mode = undefined;
@@ -77,6 +95,10 @@ define(function(require) {
             }
         };
 
+        /**
+            @name dotcloud.sync#AbstractArray
+            @lends dotcloud.sync
+        */
         var AbstractArray = function(collection) {
             
             // Placeholder - this method is defined in child classes.
@@ -91,32 +113,57 @@ define(function(require) {
 
             var changeCallbacks = [updateLength];
 
-            // This method is called everytime the underlying data is changed.
-            // It is responsible of calling all the observers declared using the
-            // `observe` method.
+            /**
+                This method is called everytime the underlying data is changed.
+                
+                @description
+                It is responsible of calling all the observers declared using the
+                `observe` method.
+
+                @function
+                @protected
+                @name dotcloud.sync.AbstractArray#__notifyChanged
+        
+            */
             this.__notifyChanged = function() {
                 for (var i = changeCallbacks.length - 1; i >= 0; i--) {
                     changeCallbacks[i].apply(null, arguments);
                 }
             };
 
-            // `Array#observe(fn)`  
-            // This method adds an observer function to the synchronized array. 
-            // Whenever an insert, removal, or update occurs, the function is called
-            // with parameters indicating the type and target of the change.
+            /**
+                This method adds an observer function to the synchronized array.
+
+                @description
+                Whenever an insert, removal, or update occurs, the function is called
+                with parameters indicating the type and target of the change.
+
+                @public
+                @memberOf dotcloud.sync.AbstractArray
+                @name dotcloud.sync.AbstractArray#observe
+                @param {Function} fn Callback function called when the array is modified.
+            */
             this.observe = function(fn) {
                 changeCallbacks.unshift(fn);
                 return this;
             };
 
-             // `Array#indexOf(obj)`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf>
+             /**
+                @public
+                @function
+                @name dotcloud.sync.AbstractArray#indexOf 
+                @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
+            */
             this.indexOf = function(obj) {
                 return this.__data().indexOf(obj);
             };
 
-            // `Array#join(str)`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/join>
+            /** 
+                @public
+                @function
+                @name dotcloud.sync.AbstractArray#join
+                @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/join
+            */
             this.join = function(str) {
                 return this.__data().join(str);
             };
@@ -181,6 +228,12 @@ define(function(require) {
 
             // `Array#forEach(fn, [thisParameter])`  
             // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/forEach>
+            /**
+                @name dotcloud.sync.AbstractArray#forEach
+                @param {Function} fn iterator function
+                @param {Object} [that]
+                @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/forEach">MDN > forEach</a>
+            */
             this.forEach = function(fn, that) {
                 var data = this.__data();
                 for (var i = 0, l = this.length; i < l; i++) {
@@ -189,8 +242,20 @@ define(function(require) {
                 }
             };
 
-            // `Array#every(fn, [thisParameter])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/every>
+            /**
+                Summary.
+    
+                @description
+                This is a long description.
+                
+                @public
+                @name dotcloud.sync.AbstractArray#every
+                @function
+                @param {Function} fn iterator function
+                @param {Object} [that]
+                @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/every">MDN > every</a>
+
+            */
             this.every = function(fn, that) {
                 var data = this.__data();
                 for (var i = 0, l = this.length; i < l; i++) {
@@ -236,13 +301,22 @@ define(function(require) {
 
     
 
-        // ### sync.Array
-        // Synchronized Array type, which is the return type of the `sync.synchronize` 
-        // method. It wraps a javascript array and provides the same methods.  
-        // **Note: Since the underlying persistence layer has no order preservation, 
-        // order is discarded when using this structure. (push and unshift perform the 
-        // same operation, as well as pop and shift). If order is important to your 
-        // application, you should use the `RedisArray`.**
+        /**
+            Synchronized Array type, which is the return type of the `sync.synchronize` 
+            method.
+
+            @description
+            It wraps a javascript array and provides the same methods.  
+            **Note: Since the underlying persistence layer has no order preservation, 
+            order is discarded when using this structure. (push and unshift perform the 
+            same operation, as well as pop and shift). If order is important to your
+            application, you should use the `RedisArray`.**
+
+            @name dotcloud.sync#Array
+            @lends dotcloud.sync
+            @memberOf dotcloud.sync#sync
+            
+        */
         sync.Array = function(collection, pvt) {
             var data = [];
             var dbid = config.dbid;
@@ -336,11 +410,22 @@ define(function(require) {
             this.length = data.length;
         };
 
-        // `Array#at(index, [update])`  
-        // This method is not a standard Array method. It allows accessing the 
-        // item present at the specified `index`.  
-        // If the second parameter is provided, the objects will be merged and an
-        // update command will be sent to the underlying persistence layer.
+        /**
+            `Array#at(index, [update])`  
+            This method is not a standard Array method. It allows accessing the 
+            item present at the specified `index`.  
+            
+            @description
+            If the second parameter is provided, the objects will be merged and an
+            update command will be sent to the underlying persistence layer.
+
+            @name dotcloud.sync.Array#at
+            @public
+            @methodOf dotcloud.sync.Array
+            @param {Number} index
+            @param {Object} [update]
+        
+        */
         sync.Array.prototype.at = function(index, update) {
             var data = this.__data(),
                 config = this.__config();
@@ -354,8 +439,12 @@ define(function(require) {
             return data[index];
         };
 
-        // `Array#pop()`  
-        // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop>
+        /**
+            @name dotcloud.sync.Array#pop  
+            @public
+            @methodOf dotcloud.sync.Array
+            @see <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop>
+        */
         sync.Array.prototype.pop = function() {
             var data = this.__data(),
                 config = this.__config();
@@ -367,8 +456,11 @@ define(function(require) {
             return data[data.length - 1];
         };
 
-        // `Array#push(objs...)`  
-        // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push>
+        /**
+            @name dotcloud.sync.Array#push
+            @function  
+            @see <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push>
+        */
         sync.Array.prototype.push = function(obj) {
             var data = this.__data(),
                 config = this.__config();

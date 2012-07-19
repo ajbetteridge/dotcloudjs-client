@@ -6,8 +6,15 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
  
-// dotcloud.js is provided as a *requirejs* module. For more information, you can visit
-// <http://requirejs.org>
+
+
+/**
+    dotcloud.js is provided as a *requirejs* module. For more information, you can visit
+    <http://requirejs.org>
+
+    @name dotcloud
+    @namespace
+*/
 define(function(require) {
     var isReady = false;
     var readyCb = [];
@@ -15,6 +22,7 @@ define(function(require) {
 
     var config = require('config');
     var io = require('stack.io')();
+
 
     function ready() {
         var i = readyCb.length;
@@ -25,9 +33,16 @@ define(function(require) {
     }
 
 
-    // When provided with a function parameter, `ready` will use it
-    // as a callback when the `dotcloud` module is ready to be used.  
-    // The module is provided as first (and only) argument of the callback.
+    /**
+        When provided with a function parameter, `ready` will use it
+        as a callback when the `dotcloud` module is ready to be used.  
+        The module is provided as first (and only) argument of the callback.
+
+        @public
+        @name dotcloud#ready
+        @function
+        @param {function} callback The callback to execute whenever dotcloud JS is loaded.
+    */
     self.ready = function(fn) {
         if (fn instanceof Array) {
             readyCb = readyCb.concat(fn);

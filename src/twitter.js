@@ -6,13 +6,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
 
-// ## dotcloud.twitter  
-// *Sub-module providing the Twitter API*  
-// REST API, Search API and Streaming API are supported. Bindings are
-// mostly done one-to-one on REST endpoints.  
-// Also provides a simplified oauth mechanism (see OAuth section).  
-// *Parameters that identify a user can be given either a `screen_name` or a `user_id`.
-// To avoid ambiguity, `screen_name`s can be prefixed with "@"*
+/**
+    Sub-module providing the Twitter API 
+    
+    @description
+    REST API, Search API and Streaming API are supported. Bindings are
+    mostly done one-to-one on REST endpoints.  
+    Also provides a simplified oauth mechanism (see OAuth section).  
+    Parameters that identify a user can be given either a `screen_name` or a `user_id`.
+    To avoid ambiguity, `screen_name`s can be prefixed with "@"
+
+    @name dotcloud.twitter
+    @class
+*/
 define(function(require) {
     return function(config, io) {
         var appService = null, accessToken = null, appKey;
@@ -24,12 +30,29 @@ define(function(require) {
         };
 
         var module = {
-            // `init(key, [secret], [token], callback)`  
-            // Initializes the twitter service for the twitter application identified
-            // by its consumer *key*. The consumer secret has to be provided **once** and will
-            // be persisted safely on the server. It should not be exposed in released code!  
-            // For quick testing, the *token* parameter can also be provided with an 
-            // access token object containing a key and secret.
+            /** 
+                Initializes the twitter service for the twitter application identified
+                by its consumer *key*.
+                
+                @description
+                The consumer secret has to be provided **once** and will
+                be persisted safely on the server. It should not be exposed in released code!  
+                For quick testing, the *token* parameter can also be provided with an 
+                access token object containing a key and secret.
+
+                @public
+                @name dotcloud.twitter#init
+                @function
+                @param {String} key 
+                @param {String} [Secret]
+                @param {Function} [callback]
+
+                @example
+// with the key and secret already <a href="http://js.dotcloud.com/#twitter">setup</a>
+twitter.init('AZEaeaazeaEAEsqSDAE', function(){
+    // let's use dotcloud JS's Twitter module
+});
+            */
             init: function(key, secret, token, cb) {
                 if (typeof secret == 'function') {
                     cb = secret, token = null, secret = null;
@@ -56,39 +79,74 @@ define(function(require) {
                 });
             },
             
-            // ### Timelines  
-            // `timeline([type], [params], cb)`  
-            // [GET /statuses/home\_timeline](https://dev.twitter.com/docs/api/1/GET/statuses/home_timeline), [GET /statuses/user\_timeline](https://dev.twitter.com/docs/api/1/GET/statuses/user_timeline)  
-            // *type* can be either "user" or "home". Defaults to "home".  
-            // *params* can be provided as specified [here](https://dev.twitter.com/docs/api/1/get/statuses/user_timeline),
-            // [here](https://dev.twitter.com/docs/api/1/get/statuses/home_timeline)
+            /**
+                Timelines.
+
+                @decription
+                [GET /statuses/home\_timeline](https://dev.twitter.com/docs/api/1/GET/statuses/home_timeline), [GET /statuses/user\_timeline](https://dev.twitter.com/docs/api/1/GET/statuses/user_timeline)  
+                
+                @public
+                @name dotcloud.twitter#timeline
+                @function
+                @param {Sring} [type] can be either "user" or "home". Defaults to "home".
+                @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/user_timeline">here</a>,
+                <a href="https://dev.twitter.com/docs/api/1/get/statuses/home_timeline">here</a>
+                @param {Function} cb
+            */
             timeline: function(type, params, cb) {
                 transfer('timeline', arguments);
             },
-            // `timeline([params], cb)`  
-            // [GET /statuses/mentions](https://dev.twitter.com/docs/api/1/GET/statuses/mentions)  
-            // *params* can be provided as specified [here](https://dev.twitter.com/docs/api/1/get/statuses/mentions)
+
+            /**
+                Mentions.
+
+                @decription
+                [GET /statuses/mentions](https://dev.twitter.com/docs/api/1/GET/statuses/mentions)
+
+                @public
+                @name dotcloud.twitter#mentions
+                @function
+                @param {Sring} [type] 
+                @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/mentions">here</a>
+                @param {Function} cb 
+            */
             mentions: function(params, cb) {
                 transfer('mentions', arguments);
             },
-            // `retweetsTimeline([type], [user], [params], cb)`  
-            // [GET /statuses/retweeted\_by\_me](https://dev.twitter.com/docs/api/1/GET/statuses/retweeted_by_me), [GET /statuses/retweeted\_to\_me](https://dev.twitter.com/docs/api/1/GET/statuses/retweeted_to_me),
-            // [GET /statuses/retweets\_of\_me](https://dev.twitter.com/docs/api/1/GET/statuses/retweets_of_me), [GET /statuses/retweeted\_by\_user](https://dev.twitter.com/docs/api/1/GET/statuses/retweeted_by_user), 
-            // [GET /statuses/retweeted\_to\_user](https://dev.twitter.com/docs/api/1/GET/statuses/retweeted_to_user)  
-            // *type* can be one of `[by, to, of]`  
-            // *user* is a `user_id` or a `screen_name`. The values `"me"` and `null` will retrieve the
-            // timeline for the authenticated user.  
-            // *params* can be provided as specified [here](https://dev.twitter.com/docs/api/1/get/statuses/retweeted_by_user)  
+
+            /**
+                Retweets Timeline.
+
+                @decription
+
+                @public
+                @name dotcloud.twitter#retweetsTimeline
+                @function
+                @param {Sring} [type] Can be one of `[by, to, of]`
+                @param {Sring} [user] Is a `user_id` or a `screen_name`. The values `"me"` and `null` will retrieve the
+             timeline for the authenticated user. 
+                @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/retweeted_by_user">here</a>
+                @param {Function} cb 
+            */
             retweetsTimeline: function(type, user, params, cb) {
                 transfer('retweetsTimeline', arguments);
             },
 
-            // ### Statuses  
-            // `retweeters(id, ids, [params], cb)`  
-            // [GET /statuses/:id/retweeted\_by](https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by), [GET /statuses/:id/retweeted\_by/ids](https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by/ids)  
-            // *id* is the status id whose retweeters you want to look up.  
-            // *ids* is a boolean. If set to true, an array of `user_id`s will be returned.  
-            // *params* as specified [here](https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/retweeted_by)
+            /**
+                Retweeters
+            
+                @decription
+                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by">GET /statuses/:id/retweeted\_by</a>,
+                 <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by/ids">GET /statuses/:id/retweeted\_by/ids</a> 
+
+                @public
+                @name dotcloud.twitter#retweeters
+                @function
+                @param {Sring} [id] Is the status id whose retweeters you want to look up.
+                @param {Boolean} [ids] is a boolean. If set to true, an array of `user_id`s will be returned.
+                @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/retweeted_by">here</a>
+                @param {Function} cb 
+            */
             retweeters: function(id, ids, params, cb) {
                 transfer('retweeters', arguments);
             },
