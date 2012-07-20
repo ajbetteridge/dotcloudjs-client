@@ -108,9 +108,8 @@ var people = dotcloud.sync.synchronize('people');
         };
 
         /**
-            @name dotcloud.sync#AbstractArray
+            @name dotcloud.sync.AbstractArray
             @lends dotcloud.sync
-            @class
         */
         var AbstractArray = function(collection) {
             
@@ -162,71 +161,132 @@ var people = dotcloud.sync.synchronize('people');
             };
 
              /**
+                indexOf.
+
                 @public
                 @function
                 @name dotcloud.sync.AbstractArray#indexOf 
-                @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
+                @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf">MDN > indexOf</a>
             */
             this.indexOf = function(obj) {
                 return this.__data().indexOf(obj);
             };
 
             /** 
+                join.
+
+                @description
+
                 @public
                 @function
                 @name dotcloud.sync.AbstractArray#join
-                @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/join
-            */
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/join">MDN > join</a>            */
             this.join = function(str) {
                 return this.__data().join(str);
             };
 
-            // `Array#lastIndexOf(obj)`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf>
+            /** 
+                lastIndexOf.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#lastIndeOf
+                @function
+                @param {Object} obj
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf">MDN > lastIndexOf</a>            */
             this.lastIndexOf = function(obj) {
                 return this.__data().lastIndexOf(obj);
             };
 
-            // `Array#reverse()`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/reverse>
-            // **Note: By design, the reverse operation is not reflected on the server-side**
+            /** 
+                reverse.
+
+                @description
+                By design, the reverse operation is not reflected on the server-side
+
+                @public
+                @name dotcloud.sync.AbstractArray#reverse
+                @function
+                @param {Object} obj
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf">MDN > lastIndexOf</a>            */
             this.reverse = function() {
                 this.__data().reverse();
                 return this;
             };
 
-            // `Array#slice(start, [end])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/slice>
-            // **Note: the returned Array is a plain, non-synchronized Javascript array.**
+            /** 
+                slice.
+
+                @description
+                The returned Array is a plain, non-synchronized Javascript array.
+
+                @public
+                @name dotcloud.sync.AbstractArray#slice
+                @function
+                @param {Object} start
+                @param {Object} [end]
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/slice">MDN > slice</a>            */
             this.slice = function(start, end) {
                 return this.__data().slice(start, end);
             };
 
-            // `Array#sort([fn])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/sort>
-            // **Note: By design, the sort operation is not reflected on the server-side**
+            /** 
+                sort.
+
+                @description
+                By design, the sort operation is not reflected on the server-side.
+
+                @public
+                @name dotcloud.sync.AbstractArray#sort
+                @function
+                @param {Function} fn
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/sort">MDN > sort</a>            */
             this.sort = function(fn) {
                 this.__data().sort(fn);
                 return this;
             };
 
             // `Array#toString()`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/toString>
+            // <>
+            /** 
+                toString.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#toString
+                @function
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/toString">MDN > toString</a>            */
             this.toString = function() {
                 return 'SynchronizedArray(' + this.__config().collection + '):[' + this.__data().join(', ') + ']';
             };
 
-            // `Array#valueOf()`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/valueOf>
+            /** 
+                valueOf.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#valueOf
+                @function
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/valueOf">MDN > valueOf</a>            */
             this.valueOf = function() {
                 return this.__data().valueOf();
             };
 
-            // Below are the ES5 iteration methods. The native method is not used
-            // to avoid exposing the underlying data array directly.
+            /** 
+                filter.
 
-            // `Array#filter(fn, [thisParameter])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/filter>
+                @description
+                Below are the ES5 iteration methods. The native method is not used to avoid exposing the underlying data array directly.
+
+                @public
+                @name dotcloud.sync.AbstractArray#filter
+                @function
+                @param {Function} fn
+                @param {Object} that
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/filter">MDN > filter</a>            */
             this.filter = function(fn, that) {
                 var data = this.__data();
                 var result = [];
@@ -239,8 +299,6 @@ var people = dotcloud.sync.synchronize('people');
                 return result;
             };
 
-            // `Array#forEach(fn, [thisParameter])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/forEach>
             /**
                 forEach.
 
@@ -267,7 +325,6 @@ var people = dotcloud.sync.synchronize('people');
     
                 @description
                 
-                
                 @public
                 @name dotcloud.sync.AbstractArray#every
                 @function
@@ -287,8 +344,18 @@ var people = dotcloud.sync.synchronize('people');
                 return true;
             };
 
-            // `Array#some(fn, [thisParameter])`  
-            // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/some>
+            /** 
+                some.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#some
+                @function
+                @param {Function} fn
+                @param {that} that
+                @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/some">MDN > some</a>
+            */
             this.some = function(fn, that) {
                 var data = this.__data();
                 for (var i = 0, l = this.length; i < l; i++) {
@@ -300,6 +367,17 @@ var people = dotcloud.sync.synchronize('people');
                 return false;
             };
 
+            /** 
+                reduce.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#reduce
+                @function
+                @param {Function} fn
+                @param {Object} init
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/Reduce">MDN > Reduce</a>            */
             this.reduce = function(fn, init) {
                 var data = this.__data();
                 var cur = (init !== undefined) ? init : data[0];
@@ -309,6 +387,17 @@ var people = dotcloud.sync.synchronize('people');
                 return cur;
             };
 
+            /** 
+                reduceRight.
+
+                @description
+
+                @public
+                @name dotcloud.sync.AbstractArray#reduceRight
+                @function
+                @param {Function} fn
+                @param {Object} init
+                @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/ReduceRight">MDN > ReduceRight</a>            */
             this.reduceRight = function(fn, init) {
                 var data = this.__data();
                 var cur = (init !== undefined) ? init : data[data.length - 1];
@@ -463,11 +552,11 @@ var people = dotcloud.sync.synchronize('people');
             pop.
 
             @description
-            <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop">MDN > pop</a>
 
             @name dotcloud.sync#pop  
             @public
             @function
+            @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop">MDN > pop</a>
         */
         sync.Array.prototype.pop = function() {
             var data = this.__data(),
@@ -484,13 +573,12 @@ var people = dotcloud.sync.synchronize('people');
             push.
 
             @description
-            <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push">MDN > push</a>
 
             @name dotcloud.sync#push
             @public
             @function  
             @param {Object} obj
-        */
+            @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push">MDN > push</a>        */
         sync.Array.prototype.push = function(obj) {
             var data = this.__data(),
                 config = this.__config();
@@ -509,6 +597,15 @@ var people = dotcloud.sync.synchronize('people');
             return data.length + arguments.length;
         };
 
+        /**
+            shift.
+
+            @description
+
+            @name dotcloud.sync#shift
+            @public
+            @function
+            @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift">MDN > unshift</a>        */
         sync.Array.prototype.shift = function() {
             var data = this.__data(),
                 config = this.__config();
@@ -519,9 +616,19 @@ var people = dotcloud.sync.synchronize('people');
             return data[0];
         };
 
-        // `Array#splice(index, num, [objects...])`  
-        // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice>
-        // **Note: the returned Array is a plain, non-synchronized Javascript array.**
+        /**
+            splice.
+
+            @description
+            Note: the returned Array is a plain, non-synchronized Javascript array.
+
+            @name dotcloud.sync#splice
+            @public
+            @function  
+            @param {Number} index
+            @param {Number} num
+            @param {...Object} [obj]
+            @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice">MDN > splice</a>        */
         sync.Array.prototype.splice = function(index, num) {
             var data = this.__data(),
                 config = this.__config(),
@@ -542,8 +649,16 @@ var people = dotcloud.sync.synchronize('people');
             return data.slice(index, index + num - 1);
         };
 
-        // `Array#unshift(objs...)`  
-        // <https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift>
+        /**
+            unshift.
+
+            @description
+
+            @name dotcloud.sync#push
+            @public
+            @function  
+            @param {...Object} obj
+            @seen <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift">MDN > unshift</a>        */
         sync.Array.prototype.unshift = function(obj) {
             var config = this.__config();
 
