@@ -7,26 +7,15 @@ define(function(require) {
                 io.call('auth', 'register')(user, password, cb);
             },
             login: function(user, password, cb) {
-                io.call('auth', 'login')(user, password, function(result) {
-                    if (result.error)
-                        return cb(result.error);
-                    io.session().key = result.key;
-                    io.session().username = result.username;
-                    io.session().userId = result.userId;
-                    cb('OK');
-                });
+                io.call('_stackio', 'login')(user, password, cb);
             },
-            logout: function() {
-                var s = io.session();
-                for (var k in s) {
-                    s[k] = undefined;
-                }
+            logout: function(cb) {
+                io.call('auth', 'logout')(cb);
             },
             checkAvailable: function(user, cb) {
-                io.call('auth', 'checkAvailable')(user, cb);
-            },
-            getUserId: function(cb) {
-                io.call('auth', 'getUserId')(cb);
+                io.call('auth', 'hasUser')(user, function(err, hasUser) {
+                    return cb(err, !hasUser);
+                });
             }
         }
     }
