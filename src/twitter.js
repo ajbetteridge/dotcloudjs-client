@@ -91,7 +91,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @param {Sring} [type] can be either "user" or "home". Defaults to "home".
                 @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/user_timeline">here</a>,
                 <a href="https://dev.twitter.com/docs/api/1/get/statuses/home_timeline">here</a>
-                @param {Function} cb
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             timeline: function(type, params, cb) {
                 transfer('timeline', arguments);
@@ -108,7 +108,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
                 @param {Sring} [type] 
                 @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/mentions">here</a>
-                @param {Function} cb 
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             mentions: function(params, cb) {
                 transfer('mentions', arguments);
@@ -126,7 +126,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @param {Sring} [user] Is a `user_id` or a `screen_name`. The values `"me"` and `null` will retrieve the
              timeline for the authenticated user. 
                 @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/retweeted_by_user">here</a>
-                @param {Function} cb 
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             retweetsTimeline: function(type, user, params, cb) {
                 transfer('retweetsTimeline', arguments);
@@ -145,7 +145,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @param {Sring} [id] Is the status id whose retweeters you want to look up.
                 @param {Boolean} [ids] is a boolean. If set to true, an array of `user_id`s will be returned.
                 @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/retweeted_by">here</a>
-                @param {Function} cb 
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             retweeters: function(id, ids, params, cb) {
                 transfer('retweeters', arguments);
@@ -162,7 +162,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
                 @param {Sring} [id] is the status id for which you want to find retweets.
                 @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/retweets">here</a>
-                @param {Function} cb 
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             retweets: function(id, params, cb) {
                 transfer('retweets', arguments);
@@ -178,7 +178,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Sring} id Is the status id for which you want to find retweets. 
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/show">here</a>
-                @param {Function} cb
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */   
             showStatus: function(id, params, cb) {
                 transfer('showStatus', arguments);
@@ -193,7 +193,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#destroyStatus
                 @function
 				@param {String} id is the id of the status you want to destroy.
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
  
             */ 
             destroyStatus: function(id, cb) {
@@ -211,7 +211,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {String} status Is the status (tweet) you want to post.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/statuses/update">here</a>
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
             */ 
             updateStatus: function(status, params, cb) {
                 transfer('updateStatus', arguments);
@@ -227,7 +227,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#retweetStatus
                 @function
 				@param {String} id Is the id of the status you want to retweet.
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
             */  
  
             retweetStatus: function(id, cb) {
@@ -244,7 +244,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#receivedDMs
                 @function
 				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/direct_messages">here</a>
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
             */  
             //   
             // 
@@ -262,7 +262,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#sentDMs
                 @function
 				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/direct_messages/sent">here</a>
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 
             */  
             //    
@@ -280,7 +280,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#destroyDM
                 @function
 				@param {String} id Is the id of the message you want to destroy.
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
             */
             destroyDM: function(id, cb) {
                 transfer('destroyDM', arguments);
@@ -296,15 +296,14 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#newDM
                 @function
 				@param {String} user Can be either a `user_id` or `screen_name` indicating the recipient
-				@param {String} Text is the content of the message to be sent.
-				@param {String} [params] as specified <a href="https://dev.twitter.com/docs/api/1/post/direct_messages/new">here</a>
-                @param {Function} cb 
+				@param {String} Text Is the content of the message to be sent.
+				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/direct_messages/new">here</a>
+                @param {Function} cb Callback function to be executed when the API call has ended.
             */
             newDM: function(user, text, params, cb) {
                 transfer('newDM', arguments);
             },
 
-            // ### 
             /**
                 Friends/followers
 
@@ -314,14 +313,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#followers
                 @function
-				@param {String} user can be either a `user_id` or `screen_name` indicating whose followers
+				@param {String} user can be either a `user_id` or `screen_name` indicating whose followers to get.
 				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/followers/ids">here</a>
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
             */  
-            //   
-            // *user* 
-            // to get.  
-            // *params* 
             followers: function(user, params, cb) {
                 transfer('followers', arguments);
             },
@@ -334,14 +329,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#friends
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user can be either a `user_id` or `screen_name` indicating whose friends to get.
+				@param {Object} [params] as specified <a href="https://dev.twitter.com/docs/api/1/get/friends/ids">here</a>
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `user_id` or `screen_name` indicating whose friends
-            // to get.  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/friends/ids">here</a>
+            */
             friends: function(user, params, cb) {
                 transfer('friends', arguments);
             },
@@ -349,18 +341,18 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 areFriends
 
                 @description
+                Will return true if userA follows userB, false otherwise.
                 <a href="https://dev.twitter.com/docs/api/1/GET/friendships/exists">GET /friendships/exists</a>
 
                 @public
                 @name dotcloud.twitter#areFriends
                 @function
-				@param {String} userA
-				@param {String} userB
-				@param {Function} cb
+				@param {String} userA Can be `user_id` or `screen_name`
+				@param {String} userB Can be `user_id` or `screen_name`
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
-            // *userA* and *userB* can be `user_id` or `screen_name`.  
-            // Will return true if userA follows userB, false otherwise.
+            // 
             areFriends: function(userA, userB, cb) {
                 transfer('areFriends', arguments);
             },
@@ -373,11 +365,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#friendshipsIn
                 @function
-				@param {Object} [params]
-				@param {Function} cb 
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/friendships/incoming">here</a>
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/friendships/incoming">here</a>
             friendshipsIn: function(params, cb) {
                 transfer('friendshipsIn', arguments);
             },
@@ -390,11 +381,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#friendshipsOut
                 @function
-				@param {Object} [params]
-				@param {Function} cb 
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/friendships/outgoing">here</a>
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/friendships/outgoing">here</a>
+            */
             friendshipsOut: function(params, cb) {
                 transfer('friendshipsOut', arguments);
             },
@@ -407,12 +397,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#showFriendship
                 @function
-				@param {Object} source
-				@param {Object} target
-				@param {Function} cb
+				@param {Object} source Can be either `user_id` or `screen_name`.
+				@param {Object} target Can be either `user_id` or `screen_name`.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *source* and *target* can be either `user_id` or `screen_name`.
+            */
             showFriendship: function(source, target, cb) {
                 transfer('showFriendship', arguments);
             },
@@ -425,14 +414,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#createFriendship
                 @function
-				@param {String} user
-				@param {Object} follow
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} follow Is a boolean that, if set to true, will enable notifications for the target user.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *follow* is a boolean that, if set to true, will enable notifications
-            // for the target user.
+            */
             createFriendship: function(user, follow, cb) {
                 transfer('createFriendship', arguments);
             },
@@ -445,11 +431,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyFriendship
                 @function
-				@param {String} user
-				@param {Function} cb 
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`
+            */
             destroyFriendship: function(user, cb) {
                 transfer('destroyFriendship', arguments);
             },
@@ -462,11 +447,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#lookupFriendships
                 @function
-				@param {String} users
-				@param {Function} cb 
+				@param {String} users Is an array of `screen_name`s or `user_id`s.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *users* is an array of `screen_name`s or `user_id`s
+            */
             lookupFriendships: function(users, cb) {
                 transfer('lookupFriendships', arguments);
             },
@@ -479,16 +463,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#updateFriendship
                 @function
-				@param {String} user
-				@param {Object} devicets
-				@param {Object} retweets
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} device Is a boolean that enables/disables notifications from target user. Pass in null to leave unchanged.
+				@param {Object} retweets Is a boolean that enables/disables retweets from target user. Pass in null to leave unchanged.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *device* is a boolean that enables/disables notifications 
-            // from target user. Pass in null to leave unchanged.  
-            // *retweets* is a boolean that enables/disables retweets from
-            // target user. Pass in null to leave unchanged.
+            */
             updateFriendship: function(user, device, retweets, cb) {
                 transfer('updateFriendship', arguments);
             },
@@ -503,11 +482,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#lookupUsers
                 @function
-				@param {String} users
-				@param {Function} cb 
+				@param {String} users Is an array of `screen_name`s or `user_id`s.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *users* is an array of `screen_name`s or `user_id`s
+            */
             lookupUsers: function(users, cb) {
                 transfer('lookupUsers', arguments);
             },
@@ -520,13 +498,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#searchUsers
                 @function
-				@param {Object} query
-				@param {Object} [params]
-				@param {Function} cb
+				@param {Object} query Is the search query to execute.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/search">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *query* is the search query to execute.  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/users/search">here</a>
+            */
             searchUsers: function(query, params, cb) {
                 transfer('searchUsers', arguments);
             },
@@ -539,13 +515,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#showUser
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/show">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/users/show">here</a>
+            */
             showUser: function(user, params, cb) {
                 transfer('showUser', arguments);
             },
@@ -558,13 +532,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#contributees
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributees">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributees">here</a>
+            */
             contributees: function(user, params, cb) {
                 transfer('contributees', arguments);
             },
@@ -577,13 +549,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#contributors
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributors">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributors">here</a>
+            */
             contributors: function(user, params, cb) {
                 transfer('contributors', arguments);
             },
@@ -596,11 +566,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#suggestionCategories
                 @function
-				@param {Object} [lang]
-				@param {Function} cb 
+				@param {Object} [lang] Is a two-letter language code, defaults to `en`.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *lang* is a two-letter language code, defaults to `en`.
+            */
             suggestionCategories: function(lang, cb) {
                 transfer('suggestionCategories', arguments);
             },
@@ -613,15 +582,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#suggestions
                 @function
-				@param {Object} slug
-				@param {Object} [members]
-				@param {Object} [lang]
+				@param {Object} slug Is the slug identifier for the suggestion category.
+				@param {Object} [members] Is a boolean indicating if the most recent status of suggested users should be included in the response. Defaults to false.
+				@param {Object} [lang] Is a two-letter language code, defaults to `en`.
 				 
-            */, <a href="https://dev.twitter.com/docs/api/1/GET/users/suggestions/:slug/members">GET /users/suggestions/:slug/members</a>  
-            // *slug* is the slug identifier for the suggestion category.  
-            // *members* is a boolean indicating if the most recent status of suggested users
-            // should be included in the response. Defaults to false.  
-            // *lang* is a two-letter language code, defaults to `en`.
+            */
             suggestions: function(slug, members, lang, cb) {
                 transfer('suggestions', arguments);
             },
@@ -632,17 +597,16 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 
                 @description
                 <a href="https://dev.twitter.com/docs/api/1/GET/blocks/blocking">GET /blocks/blocking</a>
+                
 
                 @public
                 @name dotcloud.twitter#blocking
                 @function
-				@param {Object} [params]
-				@param {Object} [ids]
-				@param {Function} cb
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/blocks/blocking">here</a>.
+				@param {Object} [ids] If true, return an array of user ids instead of full user objects.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */, <a href="https://dev.twitter.com/docs/api/1/GET/blocks/blocking/ids">GET /blocks/blocking/ids</a>  
-            // *ids* - if true, return an array of user ids instead of full user objects  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/blocks/blocking">here</a>
+            */
             blocking: function(params, ids, cb) {
                 transfer('blocking', arguments);
             },
@@ -655,13 +619,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#isBlocked
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/blocks/exists">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/blocks/exists">here</a>
+            */
             isBlocked: function(user, params, cb) {
                 transfer('isBlocked', arguments);
             },
@@ -674,13 +636,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#createBlock
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/create">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/create">here</a>
+            */ 
             createBlock: function(user, params, cb) {
                 transfer('createBlock', arguments);
             },
@@ -693,13 +653,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyBlock
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/destroy">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/destroy">here</a>
+            */
             destroyBlock: function(user, params, cb) {
                 transfer('destroyBlock', arguments);
             },
@@ -714,13 +672,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#favorites
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/favorites">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */
-            // *user* can be either a `screen_name` or `user_id`  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/favorites">here</a>
+            */ 
             favorites: function(user, params, cb) {
                 transfer('favorites', arguments);
             },
@@ -733,11 +689,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#createFavorite
                 @function
-				@param {String} id
-				@param {Function} cb 
+				@param {String} id Is the identifier for the tweet to be added to favorites.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *id* is the identifier for the tweet to be added to favorites.
+            */
             createFavorite: function(id, cb) {
                 transfer('createFavorite', arguments);
             },
@@ -750,11 +705,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyFavorite
                 @function
-				@param {String} id
-				@param {Function} cb 
+				@param {String} id Is the identifier for the tweet to be removed from favorites.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *id* is the identifier for the tweet to be removed from favorites.
+            */
             destroyFavorite: function(id, cb) {
                 transfer('destroyFavorite', arguments);
             },
@@ -769,12 +723,10 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#allLists
                 @function
-				@param {Object} [user]
-				@param {Function} cb 
+				@param {Object} [user] Can be either a `screen_name` or `user_id`. If ommitted, defaults to the currently authenticated user.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`. If ommitted, 
-            // defaults to the currently authenticated user.  
+            */ 
             allLists: function(user, cb) {
                 transfer('allLists', arguments);
             },
@@ -788,15 +740,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listStatuses
                 @function
-				@param {Object} list
-				@param {Object} [owner]
-				@param {Object} [params]
+				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
+				@param {Object} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/statuses">here</a>.
 				 
-            */  
-            // *list* can be either a list ID or a slug, in which case the
-            // *owner* parameter is required.
-            // *owner* can be either a `screen_name` or `user_id`.  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/lists/statuses">here</a>
+            */
             listStatuses: function(list, owner, params, cb) {
                 transfer('listStatuses', arguments);
             },
@@ -810,13 +758,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listSubscriptions
                 @function
-				@param {String} user
-				@param {Object} [params]
-				@param {Function} cb
+				@param {String} user Can be either a `screen_name` or `user_id`.  
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscriptions">here</a>.
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
-            */  
-            // *user* can be either a `screen_name` or `user_id`.  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscriptions">here</a>
+            */
             listSubscriptions: function(user, params, cb) {
                 transfer('listSubscriptions', arguments);
             },
@@ -830,15 +776,11 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listSubscribers
                 @function
-				@param {Object} list
-				@param {Object} [owner]
-				@param {Object} [params]
+				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
+				@param {Object} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscribers">here</a>.
 				 
-            */  
-            // *list* can be either a list ID or a slug, in which case the
-            // *owner* parameter is required.  
-            // *owner* can be either a `screen_name` or `user_id`.  
-            // *params* as specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscribers">here</a>
+            */
             listSubscribers: function(list, owner, params, cb) {
                 transfer('listSubscribers', arguments);
             },
@@ -854,7 +796,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} list
 				@param {Object} [owner]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *list* can be either a list ID or a slug, in which case the
@@ -895,7 +837,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} list
 				@param {Object} [owner]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *list* can be either a list ID or a slug, in which case the
@@ -916,7 +858,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {String} user
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *user* can be either a `screen_name` or `user_id`.  
@@ -1043,7 +985,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} list
 				@param {Object} [owner]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *list* can be either a list ID or a slug, in which case the
@@ -1087,7 +1029,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {String} user
 				@param {Object} [cursor]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *user* can be either a `screen_name` or `user_id`.  
@@ -1108,7 +1050,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} list
 				@param {Object} [owner]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *list* can be either a list ID or a slug, in which case the
@@ -1128,7 +1070,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#rateLimit
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             rateLimit: function(cb) {
@@ -1143,7 +1085,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#verifyCredentials
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             verifyCredentials: function(cb) {
@@ -1159,7 +1101,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#endSession
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             endSession: function(cb) {
@@ -1175,7 +1117,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#updateProfile
                 @function
 				@param {Object} params
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *params* as specified <a href="https://dev.twitter.com/docs/api/1/post/account/update_profile">here</a>
@@ -1193,7 +1135,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} image
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *image* image data, base-64 encoded.  
@@ -1212,7 +1154,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} image
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *image* image data, base-64 encoded.  
@@ -1230,7 +1172,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#updateProfileColors
                 @function
 				@param {Object} params
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *params* as specified <a href="https://dev.twitter.com/docs/api/1/post/account/update_profile_colors">here</a>
@@ -1247,7 +1189,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#accountTotals
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             accountTotals: function(cb) {
@@ -1263,7 +1205,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#settings
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             settings: function(cb) {
@@ -1280,7 +1222,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#updateSettings
                 @function
 				@param {Object} params
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *params as specified <a href="https://dev.twitter.com/docs/api/1/post/account/settings">here</a>
@@ -1299,7 +1241,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#follow
                 @function
 				@param {String} user
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *user* can be either a `screen_name` or `user_id`.
@@ -1316,7 +1258,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#leave
                 @function
 				@param {String} user
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *user* can be either a `screen_name` or `user_id`.
@@ -1333,7 +1275,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#savedSearches
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             savedSearches: function(cb) {
@@ -1349,7 +1291,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#showSavedSearch
                 @function
 				@param {String} id
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *id*: identifier for the saved search
@@ -1366,7 +1308,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#createSavedSearch
                 @function
 				@param {Object} query
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *query*: search query that needs to be saved
@@ -1383,7 +1325,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#destroySavedSearch
                 @function
 				@param {String} id
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *id*: identifier for the saved search
@@ -1402,7 +1344,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#geoId
                 @function
 				@param {String} placeId
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *placeId*: Identifier for the place we need information on
@@ -1439,7 +1381,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} query
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *query*: Search query  
@@ -1474,7 +1416,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#createPlace
                 @function
 				@param {Object} params
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             createPlace: function(params, cb) {
@@ -1493,7 +1435,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} woeid
 				@param {Object} [exclude]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *woeid*: The Yahoo! Where On Earth ID of the location to return trending information for. Global information is available by using 1 as the WOEID.  
@@ -1512,7 +1454,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {String} latitude
 				@param {String} longitude
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *latitude*, *longitude*: place coordinates.
@@ -1529,7 +1471,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#dailyTrends
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *params*: see <a href="https://dev.twitter.com/docs/api/1/GET/trends/daily">GET /trends/daily</a>
@@ -1546,7 +1488,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#weeklyTrends
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // *params*: see <a href="https://dev.twitter.com/docs/api/1/GET/trends/weekly">GET /trends/weekly</a>
@@ -1564,7 +1506,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#test
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             test: function(cb) {
@@ -1579,7 +1521,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#config
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             config: function(cb) {
@@ -1594,7 +1536,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#languages
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             languages: function(cb) {
@@ -1613,7 +1555,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} query
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             search: function(query, params, cb) {
@@ -1631,7 +1573,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#sampleStream
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             sampleStream: function(params, cb) {
@@ -1647,7 +1589,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#filteredStream
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             filteredStream: function(params, cb) {
@@ -1663,7 +1605,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#firehose
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             firehose: function(params, cb) {
@@ -1680,7 +1622,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} follow
 				@param {Object} [params]
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             siteStream: function(follow, params, cb) {
@@ -1696,7 +1638,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#userStream
                 @function
 				@param {Object} [params]
-				@param {Function} cb 
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
             userStream: function(params, cb) {
@@ -1712,7 +1654,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#requestToken
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // First step in OAuth process, obtains a request token.
@@ -1729,7 +1671,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} requestToken
 				@param {Object} secret
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // Second step in OAuth process. Provided with a *requestToken* key and 
@@ -1767,7 +1709,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#auth
                 @function
-				@param {Function} cb
+				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
             // Chains all steps of the OAuth process and saves the obtained
