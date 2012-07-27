@@ -49,17 +49,17 @@ define(function(require) {
                 @throws An exception is thrown if the sms object is uncomplete.
 
                 @example
-                var sms = {
-                    To : The phone number to whom to send the SMS
-                    From : The phone number your are using to send the SMS
-                    Body : The content of the SMS limited to 160 characters
-                 };
+var sms = {
+    To : The phone number to whom to send the SMS
+    From : The phone number your are using to send the SMS
+    Body : The content of the SMS limited to 160 characters
+ };
 
-                 var callback = function(){
-                    console.log('SMS sended thanks to twilio');
-                 };
+ var callback = function(){
+    console.log('SMS sended thanks to twilio');
+ };
 
-                 dotcloud.sendSMS(sms, callback);
+dotcloud.sendSMS(sms, callback);
 
             */
             sendSMS: function(sms, cb) {
@@ -88,22 +88,22 @@ define(function(require) {
                 @throws An exception is thrown if the call object is uncomplete.
 
                 @example
-                var call = {
-                    // The phone number to whom make the call
-                      To : ""
-                    // The phone number your are using make the call
-                    , From : ""
-                    // either give a string to be read by Twilio
-                    , say : "dotcloud JS love twilio"
-                    // or or direct TwiML
-                    , xml : '<?xml version="1.0" encoding="UTF-8" ?><Response><Say>dotcloud JS love twilio</Say></Response>'
-                }
+var call = {
+    // The phone number to whom make the call
+      To : ""
+    // The phone number your are using make the call
+    , From : ""
+    // either give a string to be read by Twilio
+    , say : "dotcloud JS love twilio"
+    // or or direct TwiML
+    , xml : '<?xml version="1.0" encoding="UTF-8" ?><Response><Say>dotcloud JS love twilio</Say></Response>'
+}
 
-                 var callback = function(){
-                    console.log('Call made thanks to twilio');
-                 };
+var callback = function(){
+    console.log('Call made thanks to twilio');
+};
 
-                 dotcloud.makeCall(call, callback);
+dotcloud.makeCall(call, callback);
             */
             makeCall:  function(call, cb) {
                 if(undefined == call)       throw "No CALL object given";
