@@ -740,7 +740,7 @@ define(function(require) {
                         if (!err) {
                             accessToken = { key: result.key, secret: result.secret };
                         }
-                        cb(result);
+                        cb(err, result);
                     });
                     window.removeEventListener('message', listener);
                 };
