@@ -83,7 +83,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 Timelines.
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/home_timeline">GET /statuses/home\_timeline</a>, <a href="https://dev.twitter.com/docs/api/1/GET/statuses/user_timeline">GET /statuses/user\_timeline</a>  
+                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/home_timeline">GET /statuses/home_timeline</a>, <a href="https://dev.twitter.com/docs/api/1/GET/statuses/user_timeline">GET /statuses/user_timeline</a>  
                 
                 @public
                 @name dotcloud.twitter#timeline
@@ -134,8 +134,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 Retweeters
             
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by">GET /statuses/:id/retweeted\_by</a>,
-                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by/ids">GET /statuses/:id/retweeted\_by/ids</a> 
+                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by">GET /statuses/:id/retweeted_by</a>,
+                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/:id/retweeted_by/ids">GET /statuses/:id/retweeted_by/ids</a> 
 
                 @public
                 @name dotcloud.twitter#retweeters
@@ -236,7 +236,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 Direct messages
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/direct_messages">GET /direct\_messages</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/direct_messages">GET /direct_messages</a>
 
                 @public
                 @name dotcloud.twitter#receivedDMs
@@ -254,7 +254,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 sentDMs
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/direct_messages/sent">GET /direct\_messages/sent</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/direct_messages/sent">GET /direct_messages/sent</a>
 
                 @public
                 @name dotcloud.twitter#sentDMs
@@ -272,7 +272,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 destroyDM
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/direct_messages/:id/destroy">POST /direct\_messages/:id/destroy</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/direct_messages/:id/destroy">POST /direct_messages/:id/destroy</a>
 
                 @public
                 @name dotcloud.twitter#destroyDM
@@ -288,7 +288,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 newDM
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/direct_messages/new">POST /direct\_messages/new</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/direct_messages/new">POST /direct_messages/new</a>
 
                 @public
                 @name dotcloud.twitter#newDM
@@ -879,7 +879,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 
                 @description
                 <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/create">POST /lists/members/create</a>
-                <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/create_all">POST /lists/members/create\_all</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/create_all">POST /lists/members/create_all</a>
 
                 @public
                 @name dotcloud.twitter#addMember
@@ -918,14 +918,14 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 
                 @description
                 <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/destroy">POST /lists/members/destroy</a>
-                <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/destroy_all">POST /lists/members/destroy\_all</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/lists/members/destroy_all">POST /lists/members/destroy_all</a>
 
                 @public
                 @name dotcloud.twitter#removelistMember
                 @function
 				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
 				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
-                @param {String|String[]} user can be either a <code>screen_name</code> or <code>user_id</code>. Alternatively, if an array is provided, the destroy\_all endpoint will be used.
+                @param {String|String[]} user can be either a <code>screen_name</code> or <code>user_id</code>. Alternatively, if an array is provided, the destroy_all endpoint will be used.
 				 
             */
             removeListMember: function(list, owner, user, cb) {
@@ -1027,7 +1027,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 rateLimit
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/account/rate_limit_status">GET /account/rate\_limit\_status</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/account/rate_limit_status">GET /account/rate_limit_status</a>
 
                 @public
                 @name dotcloud.twitter#rateLimit
@@ -1042,7 +1042,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 verifyCredentials
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/account/verify_credentials">GET /account/verify\_credentials</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/account/verify_credentials">GET /account/verify_credentials</a>
 
                 @public
                 @name dotcloud.twitter#verifyCredentials
@@ -1058,7 +1058,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 endSession
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/account/end_session">POST /account/end\_session</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/end_session">POST /account/end_session</a>
 
                 @public
                 @name dotcloud.twitter#endSession
@@ -1073,7 +1073,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 updateProfile
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile">POST /account/update\_profile</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile">POST /account/update_profile</a>
 
                 @public
                 @name dotcloud.twitter#updateProfile
@@ -1089,7 +1089,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 updateBackgroundImg
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_background_image">POST /account/update\_profile\_background\_image</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_background_image">POST /account/update_profile_background_image</a>
 
                 @public
                 @name dotcloud.twitter#updateBackgroundImg
@@ -1106,7 +1106,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 updateProfileImg
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_image">POST /account/update\_profile\_image</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_image">POST /account/update_profile_image</a>
 
                 @public
                 @name dotcloud.twitter#updateProfileImg
@@ -1123,7 +1123,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 updateProfileColors
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_colors">POST /account/update\_profile\_colors</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/update_profile_colors">POST /account/update_profile_colors</a>
 
                 @public
                 @name dotcloud.twitter#updateProfileColors
@@ -1222,7 +1222,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 savedSearches
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/saved_searches">GET /saved\_searches</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/saved_searches">GET /saved_searches</a>
 
                 @public
                 @name dotcloud.twitter#savedSearches
@@ -1237,7 +1237,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 showSavedSearch
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/saved_searches/show/:id">GET /saved\_searches/show/:id</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/saved_searches/show/:id">GET /saved_searches/show/:id</a>
 
                 @public
                 @name dotcloud.twitter#showSavedSearch
@@ -1253,7 +1253,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 createSavedSearch
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/saved_searches/create">POST /saved\_searches/create</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/saved_searches/create">POST /saved_searches/create</a>
 
                 @public
                 @name dotcloud.twitter#createSavedSearch
@@ -1269,7 +1269,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 destroySavedSearch
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/POST/saved_searches/destroy/:id">POST /saved\_searches/destroy/:id</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/saved_searches/destroy/:id">POST /saved_searches/destroy/:id</a>
 
                 @public
                 @name dotcloud.twitter#destroySavedSearch
@@ -1287,7 +1287,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 geoId
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/geo/id/:place_id">GET /geo/id/:place\_id</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/geo/id/:place_id">GET /geo/id/:place_id</a>
 
                 @public
                 @name dotcloud.twitter#geoId
@@ -1303,7 +1303,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 reverseGeocode
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/geo/reverse_geocode">GET /geo/reverse\_geocode</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/geo/reverse_geocode">GET /geo/reverse_geocode</a>
 
                 @public
                 @name dotcloud.twitter#reverseGeocode
@@ -1337,7 +1337,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 similarPlaces
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/get/geo/similar_places">GET /geo/similar\_places</a>
+                <a href="https://dev.twitter.com/docs/api/1/get/geo/similar_places">GET /geo/similar_places</a>
 
                 @public
                 @name dotcloud.twitter#similarPlaces
