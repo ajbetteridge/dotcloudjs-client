@@ -169,7 +169,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 showStatus
 
                 @description
-                <a href="GET /statuses/show/:id">https://dev.twitter.com/docs/api/1/GET/statuses/show/:id</a>
+                <a href="https://dev.twitter.com/docs/api/1/GET/statuses/show/:id">GET /statuses/show/:id</a>
 
                 @public
                 @name dotcloud.twitter#showStatus
@@ -1058,7 +1058,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 endSession
 
                 @description
-                <a href="https://dev.twitter.com/docs/api/1/GET/account/end_session">GET /account/end\_session</a>
+                <a href="https://dev.twitter.com/docs/api/1/POST/account/end_session">POST /account/end\_session</a>
 
                 @public
                 @name dotcloud.twitter#endSession
