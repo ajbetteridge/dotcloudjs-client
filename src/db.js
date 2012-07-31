@@ -12,16 +12,16 @@
 
     @description
     Every method of this sub-module can be chained.
-    Every method's callback is provided with one `data` argument containing
-    an `error` field if something occured server-side and a `result` field
-    containing the data returned by the query, if any.
+    Every method's callback is provided with <strong>two arguments</strong>: an `error` argument if 
+    something occured server-side and a `result` argument containing the data returned by the 
+    query, if any.
     <br />
-    <h3>Authentificated user specific methods</h3>
+    <h3>Authenticated user specific methods</h3>
     Evry method of this sub-modules can also be accessed through the <em>private</em> sub-object.
-    It enable data persistence for the authentificated user.
+    It enable data persistence for the authenticated user.
 
     @example
-// Query the whole collection of the current Authentificated user
+// Query the whole collection of the current authenticated user
 dotcloud.db.private.find('people', 
   function(data) {
     if (data.error) throw data.error;
@@ -30,7 +30,7 @@ dotcloud.db.private.find('people',
 );
 
     @name dotcloud.db
-    @class
+    @namespace
 */
 define(function(require) {
     return function(config, io) {

@@ -17,7 +17,7 @@
     To avoid ambiguity, `screen_name`s can be prefixed with "@"
 
     @name dotcloud.twitter
-    @class
+    @namespace
 */
 define(function(require) {
     return function(config, io) {

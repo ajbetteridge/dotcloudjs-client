@@ -8,23 +8,23 @@
 
 /**
 
-    This module provide some basic bindngs with Twilio's awesome API.
+    This module provides some basic bindngs with Twilio's API.
 
     @description
-    It enable you to send SMS and send call. Before you can use it you need to set up you api keys
-    <a href="http://js.dotcloud.com/#twilio">follow the wizard</a> or make the following curl call.
+    It allows you to send text messages and make automated calls. Before you can use it you need to 
+    set up you api keys by <a href="http://js.dotcloud.com/#twilio">following the wizard</a> or 
+    making the following curl call.
 
     @example
     // to setup
-    curl -d "sid=__ACCOUNT_SID__&token=__AUTH_TOKEN__" http://api.jslib.dotcloud.com/twilio/setup
+    curl -d "sid=__ACCOUNT_SID__&token=__AUTH_TOKEN__" "http://api.jslib.dotcloud.com/twilio/setup"
 
     // to change
-    curl -d "sid=__ACCOUNT_SID__&token=__AUTH_TOKEN__&s;newToken=__NEW_AUTH_TOKEN__" http://api.jslib.dotcloud.com/twilio/setup
+    curl -d "sid=__ACCOUNT_SID__&token=__AUTH_TOKEN__&newToken=__NEW_AUTH_TOKEN__" "http://api.jslib.dotcloud.com/twilio/setup"
 
 
     @name dotcloud.twilio
-    @class
-    @param {String} sid you need to provide your Twilio Secret ID
+    @namespace
 
 */ 
 define(function(require) {
@@ -32,12 +32,12 @@ define(function(require) {
         var twilio = {
             sid : null,
             /**
-                Sends a SMS using Twilio's API.
+                Send a text message using Twilio's API.
 
                 @description
-                The CallBack function cb will be call after the query to the twilio API has been made.
-                And not after the SMS has been sent.
-                Twilio API only support sending SMS shorter than 160 characters.
+                The callBack function cb will be call after the query to the twilio API has been made, 
+                not after the SMS has been sent.
+                Twilio's API only supports sending SMS shorter than 160 characters.
 
                 
                 @public
@@ -46,7 +46,7 @@ define(function(require) {
                 @param {object} sms The object containning all the info about the SMS.
                 @param {function} cb The callback called when the SMS has been added to the Twilio waiting list
 
-                @throws An exception is thrown if the sms object is uncomplete.
+                @throws An exception is thrown if the sms object is incomplete.
 
                 @example
 var sms = {
@@ -63,7 +63,7 @@ dotcloud.sendSMS(sms, callback);
 
             */
             sendSMS: function(sms, cb) {
-                if(null== twilio.sid) throw "SID not defined";
+                if(!twilio.sid) throw "SID not defined";
                 if(undefined == sms)        throw "No SMS object given";
                 if(undefined == sms.From)   throw "No 'From' attribute in SMS object";
                 if(undefined == sms.To)     throw "No 'To' attribute in SMS object";
@@ -74,7 +74,7 @@ dotcloud.sendSMS(sms, callback);
             }
 
             /**
-                Makes a Call using Twilio's API.
+                Make a call using Twilio's API.
 
                 @description The CALL object must contain the following attributes.
                 
@@ -106,6 +106,7 @@ var callback = function(){
 dotcloud.makeCall(call, callback);
             */
             makeCall:  function(call, cb) {
+                if(!twilio.sid) throw "SID not defined";
                 if(undefined == call)       throw "No CALL object given";
                 if(undefined == call.From)  throw "No 'From' attribute in CALL object";
                 if(undefined == call.To)    throw "No 'To' attribute in CALL object";
@@ -113,12 +114,22 @@ dotcloud.makeCall(call, callback);
                 if(undefined !== call.xml && undefined !== call.say)  throw "Only give 'xml' or 'say' attribute.";
                 
                 io.call('twilio', 'makeCall')(twilio.sid, call, cb);
+            },
+            /**
+                Initialize the Twilio module using the provided Twilio secret ID. 
+                Enables the other methods in the module.
+                @public
+                @name dotcloud.twilio#init
+                @function
+                @param {String} sid your Twilio Secret ID
+            */
+            init: function(sid) {
+                this.sid = sid;
+                return this;
             }
 
         };
-        return function(sid) {
-            twilio.sid = sid;
-            return twilio;
-        };
+        
+        return twilio;
     };
 });

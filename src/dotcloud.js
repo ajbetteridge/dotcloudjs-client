@@ -9,11 +9,12 @@
 
 
 /**
-    dotcloud.js is provided as a *requirejs* module. For more information, you can visit
-    <http://requirejs.org>
+    dotcloud.js is provided as a <em>requirejs</em> module. For more information, you can visit 
+    <a href="http://requirejs.org">the requireJS website</a>
 
     @name dotcloud
     @namespace
+    @exports self as dotcloud
 */
 define(function(require) {
     var isReady = false;
@@ -70,9 +71,9 @@ define(function(require) {
         The module is provided as first (and only) argument of the callback.
 
         @public
-        @name dotcloud#ready
+        @name dotcloud.ready
         @function
-        @param {function} callback The callback to execute whenever dotcloud JS is loaded.
+        @param {function} fn The callback to execute whenever dotcloud JS is loaded.
     */
     self.ready = function(fn) {
         if (fn instanceof Array) {
