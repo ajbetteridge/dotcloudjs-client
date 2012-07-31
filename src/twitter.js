@@ -13,8 +13,8 @@
     REST API, Search API and Streaming API are supported. Bindings are
     mostly done one-to-one on REST endpoints.  
     Also provides a simplified oauth mechanism (see OAuth section).  
-    Parameters that identify a user can be given either a `screen_name` or a `user_id`.
-    To avoid ambiguity, `screen_name`s can be prefixed with "@"
+    Parameters that identify a user can be given either a <code>screen_name</code> or a <code>user_id</code>.
+    To avoid ambiguity, <code>screen_name</code>s can be prefixed with "@"
 
     @name dotcloud.twitter
     @class
@@ -32,12 +32,12 @@ define(function(require) {
         var module = {
             /** 
                 Initializes the twitter service for the twitter application identified
-                by its consumer *key*.
+                by its consumer <em>key</em>.
                 
                 @description
-                The consumer secret has to be provided **once** and will
+                The consumer secret has to be provided <em>*once</em>* and will
                 be persisted safely on the server. It should not be exposed in released code!  
-                For quick testing, the *token* parameter can also be provided with an 
+                For quick testing, the <em>token</em> parameter can also be provided with an 
                 access token object containing a key and secret.
 
                 @public
@@ -121,8 +121,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#retweetsTimeline
                 @function
-                @param {Sring} [type] Can be one of `[by, to, of]`
-                @param {Sring} [user] Is a `user_id` or a `screen_name`. The values `"me"` and `null` will retrieve the timeline for the authenticated user. 
+                @param {Sring} [type] Can be one of <code>[by, to, of]</code>
+                @param {Sring} [user] Is a <code>user_id</code> or a <code>screen_name</code>. The values <code>"me"</code> and <code>null</code> will retrieve the timeline for the authenticated user. 
                 @param {Object} [params] can be provided as specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/retweeted_by_user">here</a>
                 @param {Function} cb Callback function to be executed when the API call has ended.
             */
@@ -141,7 +141,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @name dotcloud.twitter#retweeters
                 @function
                 @param {Sring} [id] Is the status id whose retweeters you want to look up.
-                @param {Boolean} [ids] is a boolean. If set to true, an array of `user_id`s will be returned.
+                @param {Boolean} [ids] is a boolean. If set to true, an array of <code>user_id</code>s will be returned.
                 @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/statuses/%3Aid/retweeted_by">here</a>
                 @param {Function} cb Callback function to be executed when the API call has ended.
             */
@@ -293,7 +293,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#newDM
                 @function
-				@param {String} user Can be either a `user_id` or `screen_name` indicating the recipient
+				@param {String} user Can be either a <code>user_id</code> or <code>screen_name</code> indicating the recipient
 				@param {String} Text Is the content of the message to be sent.
 				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/direct_messages/new">here</a>
                 @param {Function} cb Callback function to be executed when the API call has ended.
@@ -311,7 +311,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#followers
                 @function
-				@param {String} user can be either a `user_id` or `screen_name` indicating whose followers to get.
+				@param {String} user can be either a <code>user_id</code> or <code>screen_name</code> indicating whose followers to get.
 				@param {String} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/followers/ids">here</a>
 				@param {Function} cb Callback function to be executed when the API call has ended.
             */  
@@ -327,7 +327,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#friends
                 @function
-				@param {String} user can be either a `user_id` or `screen_name` indicating whose friends to get.
+				@param {String} user can be either a <code>user_id</code> or <code>screen_name</code> indicating whose friends to get.
 				@param {Object} [params] as specified <a href="https://dev.twitter.com/docs/api/1/get/friends/ids">here</a>
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -345,8 +345,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#areFriends
                 @function
-				@param {String} userA Can be `user_id` or `screen_name`
-				@param {String} userB Can be `user_id` or `screen_name`
+				@param {String} userA Can be <code>user_id</code> or <code>screen_name</code>
+				@param {String} userB Can be <code>user_id</code> or <code>screen_name</code>
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
@@ -395,8 +395,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#showFriendship
                 @function
-				@param {Object} source Can be either `user_id` or `screen_name`.
-				@param {Object} target Can be either `user_id` or `screen_name`.
+				@param {Object} source Can be either <code>user_id</code> or <code>screen_name</code>.
+				@param {Object} target Can be either <code>user_id</code> or <code>screen_name</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -412,7 +412,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#createFriendship
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} follow Is a boolean that, if set to true, will enable notifications for the target user.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -429,7 +429,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyFriendship
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -445,7 +445,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#lookupFriendships
                 @function
-				@param {String} users Is an array of `screen_name`s or `user_id`s.
+				@param {String} users Is an array of <code>screen_name</code>s or <code>user_id</code>s.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -461,7 +461,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#updateFriendship
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} device Is a boolean that enables/disables notifications from target user. Pass in null to leave unchanged.
 				@param {Object} retweets Is a boolean that enables/disables retweets from target user. Pass in null to leave unchanged.
 				 
@@ -480,7 +480,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#lookupUsers
                 @function
-				@param {String} users Is an array of `screen_name`s or `user_id`s.
+				@param {String} users Is an array of <code>screen_name</code>s or <code>user_id</code>s.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -513,7 +513,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#showUser
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/show">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -530,7 +530,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#contributees
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributees">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -547,7 +547,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#contributors
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/users/contributors">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -564,7 +564,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#suggestionCategories
                 @function
-				@param {Object} [lang] Is a two-letter language code, defaults to `en`.
+				@param {Object} [lang] Is a two-letter language code, defaults to <code>en</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -582,7 +582,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @function
 				@param {Object} slug Is the slug identifier for the suggestion category.
 				@param {Object} [members] Is a boolean indicating if the most recent status of suggested users should be included in the response. Defaults to false.
-				@param {Object} [lang] Is a two-letter language code, defaults to `en`.
+				@param {Object} [lang] Is a two-letter language code, defaults to <code>en</code>.
 				 
             */
             suggestions: function(slug, members, lang, cb) {
@@ -616,7 +616,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#isBlocked
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/blocks/exists">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -633,7 +633,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#createBlock
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/create">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -650,7 +650,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyBlock
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/post/blocks/destroy">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -669,7 +669,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#favorites
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/favorites">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -720,7 +720,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#allLists
                 @function
-				@param {Object} [user] Can be either a `screen_name` or `user_id`. If ommitted, defaults to the currently authenticated user.
+				@param {Object} [user] Can be either a <code>screen_name</code> or <code>user_id</code>. If ommitted, defaults to the currently authenticated user.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */ 
@@ -737,8 +737,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listStatuses
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/statuses">here</a>.
 				 
             */
@@ -755,7 +755,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listSubscriptions
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.  
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.  
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscriptions">here</a>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -773,8 +773,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listSubscribers
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscribers">here</a>.
 				 
             */
@@ -791,8 +791,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listSubscribe
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */ 
@@ -809,9 +809,9 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#isListSubscriber
                 @function
-                @param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-                @param {String} [owner] Can be either a `screen_name` or `user_id`.
-                @param {String} user Can be either a `screen_name` or `user_id`.
+                @param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+                @param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
+                @param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
                 @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/subscribers/show">here</a>
                 @param {Function} cb Callback function to be executed when the API call has ended.
  
@@ -829,8 +829,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listUnsubscribe
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */ 
@@ -847,7 +847,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listMemberships
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/memberships">here</a>
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -865,8 +865,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#listMembers
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {Object} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>secret</em> parameter is required.
+				@param {Object} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/members">here</a>
 				 
             */
@@ -884,9 +884,9 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#addMember
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
-                @param {String|String[]} user Can be either a `screen_name` or `user_id`. Alternatively, if an array is provided, the create_all endpoint will be used.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
+                @param {String|String[]} user Can be either a <code>screen_name</code> or <code>user_id</code>. Alternatively, if an array is provided, the create_all endpoint will be used.
 				 
             */
             addMember: function(list, owner, user, cb) {
@@ -902,9 +902,9 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#isListMember
                 @function
-                @param {Object} list can be either a list ID or a slug, in which case the *owner* parameter is required.
-                @param {String} [owner] Can be either a `screen_name` or `user_id`. 
-                @param {String} user Can be either a `screen_name` or `user_id`.
+                @param {Object} list can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+                @param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>. 
+                @param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
                 @param {Object} [params] As specified <a href="https://dev.twitter.com/docs/api/1/get/lists/members/show">here</a>.
                 @param {Function} cb Callback function to be executed when the API call has ended.
  
@@ -923,9 +923,9 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#removelistMember
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
-                @param {String|String[]} user can be either a `screen_name` or `user_id`. Alternatively, if an array is provided, the destroy\_all endpoint will be used.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
+                @param {String|String[]} user can be either a <code>screen_name</code> or <code>user_id</code>. Alternatively, if an array is provided, the destroy\_all endpoint will be used.
 				 
             */
             removeListMember: function(list, owner, user, cb) {
@@ -959,8 +959,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#destroyList
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {Object} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {Object} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -977,9 +977,9 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#updateList
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {String} [owner] Can be either a `screen_name` or `user_id`.
-				@param {Object} update An object containing (optionally) `mode`, `name` and `description` keys.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {String} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
+				@param {Object} update An object containing (optionally) <code>mode</code>, <code>name</code> and <code>description</code> keys.
 				 
             */
             updateList: function(list, owner, update, cb) {
@@ -995,7 +995,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#lists
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Number} [cursor] Integer that can be used to break the results into pages. If ommitted, the result will be sent in one single chunk.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
@@ -1013,8 +1013,8 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#showList
                 @function
-				@param {Object} list Can be either a list ID or a slug, in which case the *owner* parameter is required.
-				@param {Object} [owner] Can be either a `screen_name` or `user_id`.
+				@param {Object} list Can be either a list ID or a slug, in which case the <em>owner</em> parameter is required.
+				@param {Object} [owner] Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -1194,7 +1194,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#follow
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -1210,7 +1210,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 @public
                 @name dotcloud.twitter#leave
                 @function
-				@param {String} user Can be either a `screen_name` or `user_id`.
+				@param {String} user Can be either a <code>screen_name</code> or <code>user_id</code>.
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */
@@ -1433,7 +1433,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 				@param {Function} cb Callback function to be executed when the API call has ended.
 				 
             */  
-            // *params*: 
+            // <em>params</em>: 
             weeklyTrends: function(params, cb) {
                 transfer('weeklyTrends', arguments);
             },
@@ -1608,7 +1608,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 
                 @description
                 Second step in OAuth process.
-                Provided with a *requestToken* key and *secret*, obtain an `access_token` after redirecting the user through the twitter page and back.
+                Provided with a <em>requestToken</em> key and <em>secret</em>, obtain an <code>access_token</code> after redirecting the user through the twitter page and back.
 
                 @public
                 @name dotcloud.twitter#accessToken
@@ -1654,7 +1654,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
 				 
             */  
             // Chains all steps of the OAuth process and saves the obtained
-            // `access_token` in a cookie for future sessions.
+            // <code>access_token</code> in a cookie for future sessions.
             auth: function(cb) {
                 if (!appService) throw 'Twitter service was not initialized.';
 
@@ -1684,7 +1684,7 @@ twitter.init('AZEaeaazeaEAEsqSDAE', function(){
                 logout
 
                 @description
-                Remove the `access_token` cookie and unauthenticate the user.
+                Remove the <code>access_token</code> cookie and unauthenticate the user.
 
                 @public
                 @name dotcloud.twitter#logout
