@@ -59,7 +59,7 @@ var sms = {
     console.log('SMS sended thanks to twilio');
  };
 
-dotcloud.sendSMS(sms, callback);
+twilio.sendSMS(sms, callback);
 
             */
             sendSMS: function(sms, cb) {
@@ -103,7 +103,7 @@ var callback = function(){
     console.log('Call made thanks to twilio');
 };
 
-dotcloud.makeCall(call, callback);
+twilio.makeCall(call, callback);
             */
             makeCall:  function(call, cb) {
                 if(!twilio.sid) throw "SID not defined";
@@ -122,6 +122,10 @@ dotcloud.makeCall(call, callback);
                 @name dotcloud.twilio#init
                 @function
                 @param {String} sid your Twilio Secret ID
+
+                @example
+var apiSid = "AC66099c62ee19e782007f5fd4d1o8c2e7"; // your API SID should looks liek this
+var twilio = dotcloud.twilio.init(apiSid));
             */
             init: function(sid) {
                 this.sid = sid;
