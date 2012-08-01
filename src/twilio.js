@@ -56,7 +56,7 @@ var sms = {
  };
 
  var callback = function(){
-    console.log('SMS sended thanks to twilio');
+    console.log('SMS sent through twilio');
  };
 
 twilio.sendSMS(sms, callback);
@@ -100,7 +100,7 @@ var call = {
 }
 
 var callback = function(){
-    console.log('Call made thanks to twilio');
+    console.log('Call made through twilio');
 };
 
 twilio.makeCall(call, callback);
@@ -124,7 +124,7 @@ twilio.makeCall(call, callback);
                 @param {String} sid your Twilio Secret ID
 
                 @example
-var apiSid = "AC66099c62ee19e782007f5fd4d1o8c2e7"; // your API SID should looks liek this
+var apiSid = "AC66099c62ee19e782007f5fd4d1o8c2e7"; // your API SID should look like this
 var twilio = dotcloud.twilio.init(apiSid));
             */
             init: function(sid) {
