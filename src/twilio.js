@@ -64,14 +64,14 @@ dotcloud.sendSMS(sms, callback);
             */
             sendSMS: function(sms, cb) {
                 if(!twilio.sid) throw "SID not defined";
-                if(undefined == sms)        throw "No SMS object given";
-                if(undefined == sms.From)   throw "No 'From' attribute in SMS object";
-                if(undefined == sms.To)     throw "No 'To' attribute in SMS object";
-                if(undefined == sms.Body)   throw "No 'Body' attribute in SMS object";
-                if(sms.Body.length > 160)   throw "Twilio's SMS supports 20 more characters than twitter and nothing more."
+                if(!sms)        throw "No SMS object given";
+                if(!sms.From)   throw "No 'From' attribute in SMS object";
+                if(!sms.To)     throw "No 'To' attribute in SMS object";
+                if(!sms.Body)   throw "No 'Body' attribute in SMS object";
+                if(sms.Body.length > 160)   throw "Twilio's SMS supports 20 more characters than twitter and nothing more.";
 
                 io.call('twilio', 'sendSMS')(twilio.sid, sms, cb);
-            }
+            },
 
             /**
                 Make a call using Twilio's API.
@@ -107,11 +107,11 @@ dotcloud.makeCall(call, callback);
             */
             makeCall:  function(call, cb) {
                 if(!twilio.sid) throw "SID not defined";
-                if(undefined == call)       throw "No CALL object given";
-                if(undefined == call.From)  throw "No 'From' attribute in CALL object";
-                if(undefined == call.To)    throw "No 'To' attribute in CALL object";
-                if(undefined == call.xml && undefined == call.say)    throw "No 'xml' nor 'say' attribute in CALL object";
-                if(undefined !== call.xml && undefined !== call.say)  throw "Only give 'xml' or 'say' attribute.";
+                if(!call)       throw "No CALL object given";
+                if(!call.From)  throw "No 'From' attribute in CALL object";
+                if(!call.To)    throw "No 'To' attribute in CALL object";
+                if(!call.xml && !call.say)    throw "No 'xml' nor 'say' attribute in CALL object";
+                if(call.xml && call.say)  throw "Only give 'xml' or 'say' attribute.";
                 
                 io.call('twilio', 'makeCall')(twilio.sid, call, cb);
             },
