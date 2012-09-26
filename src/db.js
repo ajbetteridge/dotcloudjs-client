@@ -48,15 +48,17 @@ define(function(require) {
                 @function
                 @param {String} collection The collection name
                 @param {Object|Object[]} obj|objArray Either an element or an array of elements containing the data to insert.
-                @param {Function} [callback] Function called when the insertion is done, the query result is passed as argument.
+                @param {Function} [callback] Function called when the insertion is done. First argument will be undefined unless
+                an error occurs, in which case it will contain details about the error. The second argument contains the inserted
+                object (as a JSON object if it was a single insert, and an array if it was a multi insert)
 
                 @example
 // Insert objects in the "people" collection
 dotcloud.db.insert('people', [
    { firstname: 'John', lastname: 'Doe' },
    { firstname: 'Jane', lastname: 'Doe' }
- ], function(data){
-  console.log("inserted with id: " + data.result[0]._id);
+ ], function(err, data){
+  console.log("inserted with id: " + data[0]._id);
 });
             */
             insert: function(collection, obj, cb) {
@@ -83,7 +85,6 @@ dotcloud.db.insert('people', [
 dotcloud.db.update('people', {}, { $inc: { age: 1 }}, function() {
   console.log("entries updated");
 });
-
 
             */
             update: function(collection, criteria, obj, cb) {

@@ -5,11 +5,11 @@
  * This project is free software released under the MIT license:
  * http://www.opensource.org/licenses/mit-license.php
  */
- 
+
 
 
 /**
-    dotcloud.js is provided as a <em>requirejs</em> module. For more information, you can visit 
+    dotcloud.js is provided as a <em>requirejs</em> module. For more information, you can visit
     <a href="http://requirejs.org">the requireJS website</a>
 
     @name dotcloud
@@ -23,7 +23,7 @@ define(function(require) {
 
     var config = require('config');
     require('stack.io').io({ host: config.host, timeout: 15 }, function(err, io) {
-        // The dotcloud object is a namespace to several submodules loaded dynamically.  
+        // The dotcloud object is a namespace to several submodules loaded dynamically.
         // Each submodule is documented on its own page.
         config.ready(function(config) {
 
@@ -67,7 +67,7 @@ define(function(require) {
 
     /**
         When provided with a function parameter, `ready` will use it
-        as a callback when the `dotcloud` module is ready to be used.  
+        as a callback when the `dotcloud` module is ready to be used.
         The module is provided as first (and only) argument of the callback.
 
         @public
@@ -90,7 +90,7 @@ define(function(require) {
                 fn(self);
             }
         }
-            
+
     };
 
     return self;

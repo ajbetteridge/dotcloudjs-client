@@ -79,7 +79,7 @@ define(function(require) {
                 @param {String} [mode=mongo] Is the persistence layer used. Currently only supports mongo
                 @param {Boolean} [private=false] If the collection is private (i.e. can only be accessed by the currently authenticated user)
 
-                @see dotcloud.sync.Array
+                @see dotcloud.sync.Array, AbstractArray#observe
                 @example
 // Start synchronizing the "people" collection
 var people = dotcloud.sync.synchronize('people');
@@ -148,6 +148,10 @@ var people = dotcloud.sync.synchronize('people');
                 @memberOf AbstractArray#
                 @name observe
                 @param {Function} fn Callback function called when the array is modified.
+                The callback is provided two arguments. The first argument describes what type of operation has
+                taken place. Its value can be "inserted", "updated", "removed" or "removed-all".
+                The second argument describes the object(s) affected by the change. In the case of a deletion,
+                only the removed object id will appear.
             */
             this.observe = function(fn) {
                 changeCallbacks.unshift(fn);
