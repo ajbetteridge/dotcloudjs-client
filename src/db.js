@@ -12,8 +12,8 @@
 
     @description
     Every method of this sub-module can be chained.
-    Every method's callback is provided with <strong>two arguments</strong>: an `error` argument if 
-    something occured server-side and a `result` argument containing the data returned by the 
+    Every method's callback is provided with <strong>two arguments</strong>: an `error` argument if
+    something occured server-side and a `result` argument containing the data returned by the
     query, if any.
     <br />
     <h3>Authenticated user specific methods</h3>
@@ -22,10 +22,10 @@
 
     @example
 // Query the whole collection of the current authenticated user
-dotcloud.db.private.find('people', 
-  function(data) {
-    if (data.error) throw data.error;
-    console.log(data.result);
+dotcloud.db.private.find('people',
+  function(err, data) {
+    if (err) throw err;
+    console.log(data);
   };
 );
 
@@ -38,7 +38,7 @@ define(function(require) {
             /**
                 Insert a element into a collection.
 
-                @description  
+                @description
                 If an array is provided as the second argument, each element will be inserted in the
                 specified collection.
                 Result of this method contains the inserted object(s) with their newly-created _id.
@@ -65,9 +65,9 @@ dotcloud.db.insert('people', [
             },
 
             /**
-                Update one or several objects a collection. 
-                
-                @description 
+                Update one or several objects a collection.
+
+                @description
                 Second argument can be an object ID or a MongoDB query object.
                 Result of this method indicates the number of objects effected.
 
@@ -95,7 +95,7 @@ dotcloud.db.update('people', {}, { $inc: { age: 1 }}, function() {
                 Update one objects from collection.
 
                 @description
-                Remove an object in `collection` using its `id`, or drop the whole collection.  
+                Remove an object in `collection` using its `id`, or drop the whole collection.
                 If the second argument is ommitted, the whole collection will be dropped.
                 This method doesn't provide any result.
 
@@ -137,18 +137,18 @@ dotcloud.db.remove('animals', function() {
 
                 @example
 // Query object having Doe as lastname
-dotcloud.db.find('people', { lastname: 'Doe'}, 
-  function(data) {
-    if (data.error) throw data.error;
-    console.log(data.result);
+dotcloud.db.find('people', { lastname: 'Doe'},
+  function(err, data) {
+    if (err) throw err;
+    console.log(data);
   };
 );
 
 // Query the whole collection
-dotcloud.db.find('people', 
-  function(data) {
-    if (data.error) throw data.error;
-    console.log(data.result);
+dotcloud.db.find('people',
+  function(err, data) {
+    if (err) throw err;
+    console.log(data);
   };
 );
             */
@@ -164,9 +164,9 @@ dotcloud.db.find('people',
             /**
                 Update or insert an element.
 
-                @description  
-                Look for an object matching the given `criteria` in `collection`.  
-                If found, update it with `obj`. Otherwise, insert `obj` as a new element.  
+                @description
+                Look for an object matching the given `criteria` in `collection`.
+                If found, update it with `obj`. Otherwise, insert `obj` as a new element.
                 `criteria` is a MongoDB query object.
 
                 @public
@@ -178,8 +178,8 @@ dotcloud.db.find('people',
 
                 @example
 dotcloud.db.insert('people', { firstname: 'Jane', lastname: 'Doe' },
-    function(data){
-        console.log("inserted or updated element with id: " + data.result[0]._id);
+    function(err, data){
+        console.log("inserted or updated element with id: " + data._id);
     }
 );
 

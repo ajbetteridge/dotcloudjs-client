@@ -11,8 +11,8 @@
     This module provides some basic bindngs with Twilio's API.
 
     @description
-    It allows you to send text messages and make automated calls. Before you can use it you need to 
-    set up you api keys by <a href="http://js.dotcloud.com/#twilio">following the wizard</a> or 
+    It allows you to send text messages and make automated calls. Before you can use it you need to
+    set up you api keys by <a href="http://js.dotcloud.com/#twilio">following the wizard</a> or
     making the following curl call.
 
     @example
@@ -26,7 +26,7 @@
     @name dotcloud.twilio
     @namespace
 
-*/ 
+*/
 define(function(require) {
     return function(config, io) {
         var twilio = {
@@ -35,11 +35,11 @@ define(function(require) {
                 Send a text message using Twilio's API.
 
                 @description
-                The callBack function cb will be call after the query to the twilio API has been made, 
+                The callBack function cb will be call after the query to the twilio API has been made,
                 not after the SMS has been sent.
                 Twilio's API only supports sending SMS shorter than 160 characters.
 
-                
+
                 @public
                 @name dotcloud.twilio#sendSMS
                 @function
@@ -77,14 +77,13 @@ twilio.sendSMS(sms, callback);
                 Make a call using Twilio's API.
 
                 @description The CALL object must contain the following attributes.
-                
-                
+
                 @public
                 @name dotcloud.twilio#makeCall
                 @function
                 @param {object} call The object containning all the info about the call.
                 @param {function} cb The callbacl function to be call when the call succeed.
-                
+
                 @throws An exception is thrown if the call object is uncomplete.
 
                 @example
@@ -112,11 +111,11 @@ twilio.makeCall(call, callback);
                 if(!call.To)    throw "No 'To' attribute in CALL object";
                 if(!call.xml && !call.say)    throw "No 'xml' nor 'say' attribute in CALL object";
                 if(call.xml && call.say)  throw "Only give 'xml' or 'say' attribute.";
-                
+
                 io.call('twilio', 'makeCall')(twilio.sid, call, cb);
             },
             /**
-                Initialize the Twilio module using the provided Twilio secret ID. 
+                Initialize the Twilio module using the provided Twilio secret ID.
                 Enables the other methods in the module.
                 @public
                 @name dotcloud.twilio#init
@@ -133,7 +132,7 @@ var twilio = dotcloud.twilio.init(apiSid));
             }
 
         };
-        
+
         return twilio;
     };
 });

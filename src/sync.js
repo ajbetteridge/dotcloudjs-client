@@ -9,14 +9,14 @@
 
 define(function(require) {
     /** @exports sync as dotcloud.sync */
-    // We use izs' `inherits` function to factor similar behavior between our 
+    // We use izs' `inherits` function to factor similar behavior between our
     // array proxies. This is the non-ES5 version.
     function inherits(c, p, proto) {
         function F() { this.constructor = c; }
         F.prototype = p.prototype;
         var e = {};
         for (var i in c.prototype) {
-            if (c.prototype.hasOwnProperty(i)) 
+            if (c.prototype.hasOwnProperty(i))
                 e[i] = c.prototype[i];
         }
         if (proto) {
@@ -48,11 +48,11 @@ define(function(require) {
         return a;
     };
 
-    // This module is initialized by passing the config object which is a dependency 
+    // This module is initialized by passing the config object which is a dependency
     // of the *dotcloud* module.
     return function(config, io) {
         /**
-            Sub-module providing the synchronized storage API. 
+            Sub-module providing the synchronized storage API.
 
             @description
             You can retrieve a collection using the sync.synchronize method.
@@ -68,10 +68,10 @@ define(function(require) {
                 Synchronize a collection.
 
                 @description
-                The resulting object ({@link dotcloud.sync.Array}) tries to behave like an Array so 
-                it can be handled in a similar manner, thus reducing developer burden and increasing 
+                The resulting object ({@link dotcloud.sync.Array}) tries to behave like an Array so
+                it can be handled in a similar manner, thus reducing developer burden and increasing
                 flexibility.
-                
+
                 @public
                 @name sync#synchronize
                 @function
@@ -95,13 +95,13 @@ var people = dotcloud.sync.synchronize('people');
                 } else {
                     throw 'Unsupported persistence mode: ' + mode;
                 }
-                
+
             }
         };
 
         /**
             @name AbstractArray
-            @class Abstract class inherited by other array-behaving classes, providing basic 
+            @class Abstract class inherited by other array-behaving classes, providing basic
               iteration/lookup/observer functionality.
         */
         var AbstractArray = function(collection) {
@@ -121,14 +121,14 @@ var people = dotcloud.sync.synchronize('people');
 
             /**
                 This method is called everytime the underlying data is changed.
-                
+
                 @description
                 Call all the observers declared using the `observe` method.
 
                 @memberOf AbstractArray#
                 @private
                 @name __notifyChanged
-        
+
             */
             this.__notifyChanged = function() {
                 for (var i = changeCallbacks.length - 1; i >= 0; i--) {
@@ -160,7 +160,7 @@ var people = dotcloud.sync.synchronize('people');
                 @public
                 @function
                 @memberOf AbstractArray#
-                @name indexOf 
+                @name indexOf
                 @param {Object} obj Object to look up
                 @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf">MDN > indexOf</a>
             */
@@ -168,7 +168,7 @@ var people = dotcloud.sync.synchronize('people');
                 return this.__data().indexOf(obj);
             };
 
-            /** 
+            /**
                 Produce a string by joining each value contained in the array.
 
                 @public
@@ -181,7 +181,7 @@ var people = dotcloud.sync.synchronize('people');
                 return this.__data().join(str);
             };
 
-            /** 
+            /**
                 Find an item in the client array and return its last position.
 
                 @public
@@ -194,7 +194,7 @@ var people = dotcloud.sync.synchronize('people');
                 return this.__data().lastIndexOf(obj);
             };
 
-            /** 
+            /**
                 Reverse all elements in the client array.
 
                 @description
@@ -210,8 +210,8 @@ var people = dotcloud.sync.synchronize('people');
                 return this;
             };
 
-            /** 
-                Return an array containing all elements found between the `start` and 
+            /**
+                Return an array containing all elements found between the `start` and
                 `end` position in the client array.
 
                 @description
@@ -228,7 +228,7 @@ var people = dotcloud.sync.synchronize('people');
                 return this.__data().slice(start, end);
             };
 
-            /** 
+            /**
                 Sort elements in the client array using the provided ordering function.
 
                 @description
@@ -245,7 +245,7 @@ var people = dotcloud.sync.synchronize('people');
                 return this;
             };
 
-            /** 
+            /**
                 Return a string representation of the array.
 
                 @description
@@ -259,7 +259,7 @@ var people = dotcloud.sync.synchronize('people');
                 return 'SynchronizedArray(' + this.__config().collection + '):[' + this.__data().join(', ') + ']';
             };
 
-            /** 
+            /**
                 Return the underlying value of the client array.
 
                 @description
@@ -303,7 +303,7 @@ var people = dotcloud.sync.synchronize('people');
 
                 @description
                 ES5 iteration method. The native method is not used to avoid exposing the underlying data array directly.
-               
+
 
                 @public
                 @function
@@ -323,8 +323,7 @@ var people = dotcloud.sync.synchronize('people');
 
             /**
                 Check that every element in the array matches the filter function
-    
-                
+
                 @public
                 @function
                 @name every
@@ -345,7 +344,7 @@ var people = dotcloud.sync.synchronize('people');
                 return true;
             };
 
-            /** 
+            /**
                 Check that at least one element in the array matches the filter function
 
                 @description
@@ -370,7 +369,7 @@ var people = dotcloud.sync.synchronize('people');
                 return false;
             };
 
-            /** 
+            /**
                 Reduce the array to a single value using the reducing function. Processes the array from left to right.
 
                 @description
@@ -392,7 +391,7 @@ var people = dotcloud.sync.synchronize('people');
                 return cur;
             };
 
-            /** 
+            /**
                 Reduce the array to a single value using the reducing function. Processes the array from right to left.
 
                 @description
@@ -415,16 +414,16 @@ var people = dotcloud.sync.synchronize('people');
             };
         };
 
-    
+
 
         /**
-            Synchronized Array type, which is the return type of the `sync.synchronize` 
+            Synchronized Array type, which is the return type of the `sync.synchronize`
             method.
 
             @description
-            It wraps a javascript array and provides the same methods.  
-            Note: Since the underlying persistence layer has no order preservation, 
-            order is discarded when using this structure. (push and unshift perform the 
+            It wraps a javascript array and provides the same methods.
+            Note: Since the underlying persistence layer has no order preservation,
+            order is discarded when using this structure. (push and unshift perform the
             same operation, as well as pop and shift). If order is important to your
             application, you should use the `RedisArray`.
 
@@ -488,7 +487,7 @@ var people = dotcloud.sync.synchronize('people');
                         var id = result.data;
                         for (var i = data.length - 1; i >= 0; i--) {
                             if (data[i]._id === id) {
-                                if (i === 0) { 
+                                if (i === 0) {
                                     data.shift();
                                 } else if (i === data.length - 1) {
                                     data.pop();
@@ -521,7 +520,7 @@ var people = dotcloud.sync.synchronize('people');
                 }
             });
 
-            /** 
+            /**
                 @property
                 @name dotcloud.sync.Array#length
                 @description length (number of elements) of the synchronized collection.
@@ -530,11 +529,11 @@ var people = dotcloud.sync.synchronize('people');
         };
 
         /**
-            This method is not a standard Array method. It allows accessing the 
-            item present at the specified `index`.  
+            This method is not a standard Array method. It allows accessing the
+            item present at the specified `index`.
             If the second parameter is provided, the objects will be merged and an
             update command will be sent to the underlying persistence layer.
-            
+
             @public
             @name dotcloud.sync.Array#at
 
@@ -542,7 +541,7 @@ var people = dotcloud.sync.synchronize('people');
             @param {Number} index Index of the element we want to access
             @param {Object} [update] Update object that should be applied on the requested element
             @returns {Object} The element in its original state
-        
+
         */
         sync.Array.prototype.at = function(index, update) {
             var data = this.__data(),
@@ -560,7 +559,7 @@ var people = dotcloud.sync.synchronize('people');
         /**
             Remove the last element contained in the array.
 
-            @name dotcloud.sync.Array#pop  
+            @name dotcloud.sync.Array#pop
             @public
             @function
             @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/pop">MDN > pop</a>
@@ -569,7 +568,7 @@ var people = dotcloud.sync.synchronize('people');
         sync.Array.prototype.pop = function() {
             var data = this.__data(),
                 cfg = this.__config();
-            io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[data.length - 1]._id, 
+            io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[data.length - 1]._id,
                 function(error, result) {
                     if (error) throw error;
                 });
@@ -582,7 +581,7 @@ var people = dotcloud.sync.synchronize('people');
 
             @name dotcloud.sync.Array#push
             @public
-            @function  
+            @function
             @param {Object...} obj Objects to add to the collection
             @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/push">MDN > push</a>
             @returns {Number} The array's new length (transient)
@@ -633,7 +632,7 @@ var people = dotcloud.sync.synchronize('people');
 
             @name dotcloud.sync.Array#splice
             @public
-            @function  
+            @function
             @param {Number} index Position where the splice should be executed
             @param {Number} num Number of elements to remove
             @param {...Object} [obj] Elements to add
@@ -654,7 +653,7 @@ var people = dotcloud.sync.synchronize('people');
             for (var i = num - 1; i >= 0; i--) {
                 io.call(cfg.svcName, 'remove')(cfg.dbid, cfg.collection, data[index + i]._id, rmCb);
             }
-            
+
             for (i = arguments.length - 1; i >= 2; i--) {
                  this.push(arguments[i]);
             }
@@ -666,7 +665,7 @@ var people = dotcloud.sync.synchronize('people');
 
             @name dotcloud.sync.Array#unshift
             @public
-            @function  
+            @function
             @param {...Object} obj Elements to insert
             @see <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/unshift">MDN > unshift</a>
             @returns {Number} The array's new length (transient)
