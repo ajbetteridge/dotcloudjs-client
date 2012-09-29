@@ -17,11 +17,11 @@
     query, if any.
     <br />
     <h3>Authenticated user specific methods</h3>
-    Evry method of this sub-modules can also be accessed through the <em>private</em> sub-object.
-    It enable data persistence for the authenticated user.
+    Every method of this sub-module can also be accessed through the <em>private</em> sub-object.
+    It enables data persistence private to the authenticated user.
 
     @example
-// Query the whole collection of the current authenticated user
+// Query the whole people collection for the authenticated user
 dotcloud.db.private.find('people',
   function(err, data) {
     if (err) throw err;
@@ -29,6 +29,7 @@ dotcloud.db.private.find('people',
   };
 );
 
+    @see dotcloud.auth
     @name dotcloud.db
     @namespace
 */
