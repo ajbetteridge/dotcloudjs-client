@@ -18,7 +18,7 @@ var DEFAULT_CONFIG = {
     }
 };
 
-var DOTCLOUD_GLOB_STRING = 'window.dotcloud={cb:[],ready:function(fn){this.cb.push(fn)}};require(["dotcloud"],function(d){var c=dotcloud.cb;Object.keys(dotcloud).forEach(function(x){if(x!="cb" && x!="ready"){d[x]=this[x];}},dotcloud);window.dotcloud=d;d.ready(c);});​';
+var DOTCLOUD_GLOB_STRING = 'window.dotcloud={cb:[],ready:function(fn){this.cb.push(fn)}};require(["dotcloud"],function(d){var c=dotcloud.cb;Object.keys(dotcloud).forEach(function(x){if(x!="cb" && x!="ready"){d[x]=this[x];}},dotcloud);window.dotcloud=d;d.ready(c);});';
 
 var argc = process.argv.length;
 
