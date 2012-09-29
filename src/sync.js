@@ -79,7 +79,7 @@ define(function(require) {
                 @param {String} [mode=mongo] Is the persistence layer used. Currently only supports mongo
                 @param {Boolean} [private=false] If the collection is private (i.e. can only be accessed by the currently authenticated user)
 
-                @see dotcloud.sync.Array, <a href="AbstractArray.html#observe">MDN >observe</a>
+                @see dotcloud.sync.Array, <a href="AbstractArray.html#observe">observe</a>
                 @example
 // Start synchronizing the "people" collection
 var people = dotcloud.sync.synchronize('people');
